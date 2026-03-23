@@ -3,150 +3,416 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Vendor Profile</title>
+<title>Vendor Registration — US Hindu Rituals</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f5f5;min-height:100vh;}
-.top-bar{background:#fff;border-bottom:1px solid #e0e0e0;padding:12px 20px;display:flex;align-items:center;justify-content:flex-start;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,0.06);}
-.back-btn{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:500;color:#555;cursor:pointer;background:none;border:none;font-family:inherit;}
-.back-btn:hover{color:#E8670A;}
-.all-btn{font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:#E8670A;text-decoration:none;border:1px solid #E8670A;padding:6px 16px;border-radius:999px;transition:all 0.2s;}
-.all-btn:hover{background:#E8670A;color:#fff;}
-.loading-wrap{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:80vh;color:#888;}
-.spinner{width:44px;height:44px;border:3px solid #e0e0e0;border-top-color:#7c3aed;border-radius:50%;animation:spin 0.7s linear infinite;margin-bottom:16px;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f5f5;min-height:100vh;padding:2rem 1rem;}
+.container{max-width:680px;margin:0 auto;}
+.header{background:#1a0a2e;border-radius:16px 16px 0 0;padding:2rem;text-align:center;position:relative;overflow:hidden;}
+.header::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(ellipse at 50% 0%,rgba(139,92,246,0.35) 0%,transparent 65%);}
+.header h1{color:#e9d5ff;font-size:22px;font-weight:500;position:relative;z-index:1;}
+.header p{color:#a78bfa;font-size:13px;margin-top:6px;position:relative;z-index:1;}
+.form-body{background:#fff;border-radius:0 0 16px 16px;padding:2rem;box-shadow:0 4px 24px rgba(0,0,0,0.08);}
+.sec-title{font-size:11px;font-weight:600;color:#7c3aed;text-transform:uppercase;letter-spacing:0.08em;margin:1.5rem 0 1rem;padding-bottom:6px;border-bottom:1px solid #ede9fe;}
+.sec-title:first-child{margin-top:0;}
+.field{margin-bottom:1rem;}
+.field label{display:block;font-size:12px;font-weight:500;color:#444;margin-bottom:5px;}
+.field label .req{color:#ef4444;margin-left:2px;}
+.field input,.field select,.field textarea{width:100%;padding:10px 12px;border:1px solid #e0e0e0;border-radius:8px;font-size:13px;color:#222;background:#fafafa;font-family:inherit;}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:#7c3aed;background:#fff;}
+.field textarea{resize:vertical;min-height:80px;}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+@media(max-width:500px){.row2{grid-template-columns:1fr;}}
+.hint{font-size:11px;color:#888;margin-top:4px;}
+
+/* Logo upload */
+.logo-area{border:2px dashed #c4b5fd;border-radius:10px;padding:1.5rem;text-align:center;cursor:pointer;background:#faf5ff;position:relative;}
+.logo-area input{position:absolute;inset:0;opacity:0;cursor:pointer;}
+.logo-area p{font-size:13px;color:#7c3aed;font-weight:500;}
+.logo-area small{font-size:11px;color:#888;}
+#logoPreview{display:none;width:80px;height:80px;border-radius:50%;object-fit:contain;border:2px solid #c4b5fd;margin:10px auto 0;}
+
+/* Photo gallery upload */
+.photos-area{border:2px dashed #c4b5fd;border-radius:10px;padding:1.5rem;text-align:center;cursor:pointer;background:#faf5ff;position:relative;}
+.photos-area input{position:absolute;inset:0;opacity:0;cursor:pointer;}
+.photos-area p{font-size:13px;color:#7c3aed;font-weight:500;}
+.photos-area small{font-size:11px;color:#888;}
+.photo-previews{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-top:12px;}
+.photo-preview{aspect-ratio:1;border-radius:8px;overflow:hidden;position:relative;}
+.photo-preview img{width:100%;height:100%;object-fit:cover;}
+.photo-preview .remove{position:absolute;top:2px;right:2px;background:rgba(0,0,0,0.6);color:#fff;border:none;border-radius:50%;width:18px;height:18px;font-size:11px;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+
+/* Services */
+.svcs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
+@media(max-width:500px){.svcs-grid{grid-template-columns:repeat(2,1fr);}}
+.svc-check{display:flex;align-items:center;gap:6px;padding:8px 10px;background:#f8f8f8;border:1px solid #e0e0e0;border-radius:8px;cursor:pointer;}
+.svc-check input{accent-color:#7c3aed;width:14px;height:14px;}
+.svc-check span{font-size:12px;color:#444;font-weight:500;}
+
+/* Progress */
+.progress-wrap{margin-bottom:1rem;display:none;}
+.progress-bar{height:6px;background:#ede9fe;border-radius:99px;overflow:hidden;}
+.progress-fill{height:100%;background:#7c3aed;border-radius:99px;transition:width 0.3s;width:0%;}
+.progress-text{font-size:11px;color:#7c3aed;margin-top:4px;text-align:center;}
+
+.submit-btn{width:100%;padding:14px;background:#7c3aed;color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:600;cursor:pointer;margin-top:1.5rem;}
+.submit-btn:hover{background:#6d28d9;}
+.submit-btn:disabled{background:#c4b5fd;cursor:not-allowed;}
+.error-msg{background:#fef2f2;border:1px solid #fecaca;color:#dc2626;padding:10px 14px;border-radius:8px;font-size:13px;margin-top:1rem;display:none;}
+.success-msg{display:none;text-align:center;padding:2rem;}
+.success-msg .icon{font-size:48px;}
+.success-msg h2{color:#16a34a;margin:1rem 0 0.5rem;}
+.success-msg p{color:#666;font-size:14px;}
+.loading{display:inline-block;width:16px;height:16px;border:2px solid #fff;border-top-color:transparent;border-radius:50%;animation:spin 0.6s linear infinite;vertical-align:middle;margin-right:6px;}
 @keyframes spin{to{transform:rotate(360deg);}}
-.page-wrap{display:flex;justify-content:center;padding:2rem 1rem 4rem;}
-.vendor-card{background:#fff;border:0.5px solid #e0e0e0;border-radius:16px;overflow:hidden;width:100%;max-width:860px;box-shadow:0 4px 24px rgba(0,0,0,0.08);}
-.hero{padding:2.5rem 2rem 2rem;text-align:center;position:relative;overflow:hidden;}
-.hero-glow{position:absolute;top:0;left:0;right:0;bottom:0;pointer-events:none;}
-.logo-ring{width:96px;height:96px;border-radius:50%;border:2px solid rgba(255,255,255,0.5);background:#fff;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;position:relative;z-index:1;overflow:hidden;}
-.logo-ring img{width:86px;height:86px;object-fit:contain;}
-.vendor-name{font-size:22px;font-weight:500;position:relative;z-index:1;letter-spacing:0.02em;}
-.vendor-sub{font-size:14px;margin-top:5px;position:relative;z-index:1;opacity:0.85;}
-.stars{display:flex;justify-content:center;gap:4px;margin-top:10px;position:relative;z-index:1;}
-.star{color:#fbbf24;font-size:16px;}
-.badge{display:inline-block;font-size:11px;padding:3px 12px;border-radius:99px;margin-top:8px;font-weight:500;position:relative;z-index:1;}
-.body{padding:1.75rem;}
-.tagline{font-size:14px;color:#666;line-height:1.7;text-align:center;border-bottom:0.5px solid #e0e0e0;padding-bottom:1.25rem;margin-bottom:1.5rem;}
-.sec-label{font-size:11px;font-weight:500;color:#888;text-transform:uppercase;letter-spacing:0.07em;margin-bottom:10px;text-align:center;}
-.services{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:1.75rem;}
-@media(max-width:600px){.services{grid-template-columns:repeat(2,1fr);}}
-.svc-chip{background:#f8f8f8;border:0.5px solid #e0e0e0;border-radius:8px;padding:10px 8px;display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;}
-.svc-icon{font-size:20px;}
-.svc-label{font-size:11px;color:#555;font-weight:500;line-height:1.3;}
-.yt-section{margin-bottom:1.75rem;}
-.yt-main{border-radius:10px;overflow:hidden;aspect-ratio:16/9;background:#000;margin-bottom:10px;}
-.yt-main iframe{width:100%;height:100%;border:none;display:block;}
-.yt-thumbs{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;}
-.yt-thumb{border-radius:8px;overflow:hidden;aspect-ratio:16/9;cursor:pointer;position:relative;border:2px solid transparent;transition:border 0.15s;}
-.yt-thumb.active{border-color:#7c3aed;}
-.yt-thumb:hover{opacity:0.85;}
-.yt-thumb img{width:100%;height:100%;object-fit:cover;display:block;}
-.yt-play-ov{position:absolute;inset:0;background:rgba(0,0,0,0.3);display:flex;align-items:center;justify-content:center;}
-.play-btn{width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,0.92);display:flex;align-items:center;justify-content:center;}
-.play-tri{width:0;height:0;border-top:8px solid transparent;border-bottom:8px solid transparent;border-left:13px solid #7c3aed;margin-left:3px;}
-.thumb-title{position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,0.65);color:#fff;font-size:10px;padding:4px 6px;line-height:1.3;}
-.contact{border-top:0.5px solid #e0e0e0;padding-top:1.5rem;}
-.phones{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px;}
-.phone-btn{display:flex;align-items:center;justify-content:center;gap:8px;padding:12px;border-radius:8px;background:#f8f8f8;border:0.5px solid #e0e0e0;font-size:13px;font-weight:500;color:#222;text-decoration:none;}
-.phone-btn:hover{background:#efefef;}
-.wa-btn{display:flex;align-items:center;justify-content:center;gap:8px;padding:12px;border-radius:8px;background:#25D366;font-size:13px;font-weight:600;color:#fff;text-decoration:none;margin-bottom:8px;}
-.wa-btn:hover{background:#1ebe5d;}
-.social-row{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;}
-.soc-btn{display:flex;flex-direction:column;align-items:center;gap:5px;padding:10px 6px;background:#f8f8f8;border:0.5px solid #e0e0e0;border-radius:8px;text-decoration:none;transition:background 0.15s;}
-.soc-btn:hover{background:#ede9fe;}
-.soc-btn span{font-size:11px;color:#555;font-weight:500;}
-.soc-btn svg{width:22px;height:22px;}
 </style>
 </head>
 <body>
-<div class="top-bar">
-  <button class="back-btn" onclick="goBack()">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><polyline points="15 18 9 12 15 6"></polyline></svg>
-    Back
-  </button>
+<div class="container">
+  <div class="header">
+    <h1>🪔 Vendor Registration</h1>
+    <p>US Hindu Rituals — Join our vendor directory</p>
+  </div>
+  <div class="form-body">
+    <div id="formContent">
+
+      <div class="sec-title">Basic Information</div>
+      <div class="field">
+        <label>Business Name <span class="req">*</span></label>
+        <input type="text" id="name" placeholder="e.g. Vian Photography" required>
+      </div>
+      <div class="row2">
+        <div class="field">
+          <label>Category <span class="req">*</span></label>
+          <select id="category" required>
+            <option value="">Select category</option>
+            <option>Photography</option>
+            <option>Makeup</option>
+            <option>Decoration</option>
+            <option>Catering</option>
+            <option>Priest / Pandit</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Location <span class="req">*</span></label>
+          <input type="text" id="location" placeholder="e.g. Bentonville, AR">
+        </div>
+      </div>
+      <div class="field">
+        <label>About Us <span class="req">*</span></label>
+        <textarea id="tagline" placeholder="Briefly describe your services..."></textarea>
+      </div>
+
+      <div class="sec-title">Logo / Profile Photo</div>
+      <div class="field">
+        <div class="logo-area" id="logoArea">
+          <input type="file" id="logoFile" accept="image/*" onchange="previewLogo(this)">
+          <div class="icon" style="font-size:32px;margin-bottom:8px;">📷</div>
+          <p>Click to upload logo</p>
+          <small>JPG, PNG, WEBP — max 5MB</small>
+        </div>
+        <img id="logoPreview" src="" alt="Logo preview">
+      </div>
+
+      <div class="sec-title">Portfolio Photos</div>
+      <div class="field">
+        <div class="photos-area">
+          <input type="file" id="photosFile" accept="image/*" multiple onchange="previewPhotos(this)">
+          <div style="font-size:28px;margin-bottom:8px;">🖼️</div>
+          <p>Click to upload portfolio photos</p>
+          <small>Max 10 photos • JPG, PNG, WEBP</small>
+        </div>
+        <div class="photo-previews" id="photoPreviews"></div>
+        <div class="progress-wrap" id="progressWrap">
+          <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+          <div class="progress-text" id="progressText">Uploading...</div>
+        </div>
+      </div>
+
+      <div class="sec-title">Contact Details</div>
+      <div class="row2">
+        <div class="field">
+          <label>Phone 1 <span class="req">*</span></label>
+          <input type="tel" id="phone1" placeholder="+1 (512) 736-8124">
+        </div>
+        <div class="field">
+          <label>Phone 2</label>
+          <input type="tel" id="phone2" placeholder="+1 (337) 465-2654">
+        </div>
+      </div>
+      <div class="row2">
+        <div class="field">
+          <label>WhatsApp</label>
+          <input type="tel" id="whatsapp" placeholder="+1 (512) 736-8124">
+        </div>
+        <div class="field">
+          <label>Email</label>
+          <input type="email" id="email" placeholder="example@gmail.com">
+        </div>
+      </div>
+
+      <div class="sec-title">Social Media & Links</div>
+      <div class="field">
+        <label>Facebook URL</label>
+        <input type="url" id="facebook" placeholder="https://facebook.com/...">
+      </div>
+      <div class="field">
+        <label>Instagram URL</label>
+        <input type="url" id="instagram" placeholder="https://instagram.com/...">
+      </div>
+      <div class="field">
+        <label>YouTube Channel URL</label>
+        <input type="url" id="youtube" placeholder="https://youtube.com/@...">
+      </div>
+      <div class="field">
+        <label>Website URL</label>
+        <input type="url" id="website" placeholder="https://...">
+      </div>
+
+      <div class="sec-title">YouTube Videos (Our Work)</div>
+      <p class="hint" style="margin-bottom:12px;">YouTube video link paste చేయండి</p>
+      <div class="row2">
+        <div class="field"><label>Video 1 URL</label><input type="url" id="video1" placeholder="https://youtu.be/..."></div>
+        <div class="field"><label>Video 1 Title</label><input type="text" id="video1title" placeholder="Wedding Film"></div>
+      </div>
+      <div class="row2">
+        <div class="field"><label>Video 2 URL</label><input type="url" id="video2" placeholder="https://youtu.be/..."></div>
+        <div class="field"><label>Video 2 Title</label><input type="text" id="video2title" placeholder="Celebration"></div>
+      </div>
+      <div class="row2">
+        <div class="field"><label>Video 3 URL</label><input type="url" id="video3" placeholder="https://youtu.be/..."></div>
+        <div class="field"><label>Video 3 Title</label><input type="text" id="video3title" placeholder="Event Highlights"></div>
+      </div>
+      <div class="row2">
+        <div class="field"><label>Video 4 URL</label><input type="url" id="video4" placeholder="https://youtu.be/..."></div>
+        <div class="field"><label>Video 4 Title</label><input type="text" id="video4title" placeholder="Special Moments"></div>
+      </div>
+
+      <div class="sec-title">Services Offered</div>
+      <div class="svcs-grid">
+        <label class="svc-check"><input type="checkbox" value="💍 Weddings"><span>💍 Weddings</span></label>
+        <label class="svc-check"><input type="checkbox" value="🏠 Housewarming"><span>🏠 Housewarming</span></label>
+        <label class="svc-check"><input type="checkbox" value="🍼 Baby Shower"><span>🍼 Baby Shower</span></label>
+        <label class="svc-check"><input type="checkbox" value="🎀 Gender Reveal"><span>🎀 Gender Reveal</span></label>
+        <label class="svc-check"><input type="checkbox" value="🎂 Birthdays"><span>🎂 Birthdays</span></label>
+        <label class="svc-check"><input type="checkbox" value="🪔 Naming Ceremony"><span>🪔 Naming Ceremony</span></label>
+        <label class="svc-check"><input type="checkbox" value="🎭 Arangetram"><span>🎭 Arangetram</span></label>
+        <label class="svc-check"><input type="checkbox" value="🌾 Annaprashanam"><span>🌾 Annaprashanam</span></label>
+        <label class="svc-check"><input type="checkbox" value="🎊 Functions"><span>🎊 Functions</span></label>
+        <label class="svc-check"><input type="checkbox" value="👘 Saree Function"><span>👘 Saree Function</span></label>
+        <label class="svc-check"><input type="checkbox" value="🍽️ Catering"><span>🍽️ Catering</span></label>
+        <label class="svc-check"><input type="checkbox" value="📸 All Occasions"><span>📸 All Occasions</span></label>
+      </div>
+
+      <div class="error-msg" id="errorMsg"></div>
+      <button class="submit-btn" id="submitBtn" onclick="submitForm()">Submit for Approval</button>
+    </div>
+
+    <div class="success-msg" id="successMsg">
+      <div class="icon">✅</div>
+      <h2>Submitted Successfully!</h2>
+      <p>మీ details submit అయ్యాయి. Admin approval తర్వాత మీ profile website లో కనిపిస్తుంది.</p>
+    </div>
+  </div>
 </div>
-<div class="loading-wrap" id="loadingWrap"><div class="spinner"></div><p>Loading profile...</p></div>
-<div class="page-wrap" id="pageWrap" style="display:none;"><div class="vendor-card" id="vendorCard"></div></div>
+
 <script>
-const SHEETS_URL='https://opensheet.elk.sh/1CaYOuLNAU3b-MIm-8lAXiH8RZErrI2n3epzrr4W6T1o/1';
-const FALLBACK='https://images.unsplash.com/photo-1470509037663-253afd7f0f51?auto=format&fit=crop&w=600&q=80';
-const CAT_PAGES={'Photography':'https://www.ushindurituals.com/photo-video','Decoration':'https://www.ushindurituals.com/decoration-service','Makeup':'https://www.ushindurituals.com/find-your-makeup-artist','Catering':'https://www.ushindurituals.com','Priest / Pandit':'https://www.ushindurituals.com','Other':'https://www.ushindurituals.com'};
-const THEMES={Photography:{bg:'#1a0a2e',glow:'rgba(139,92,246,0.35)',ring:'rgba(167,139,250,0.6)',name:'#e9d5ff',sub:'#a78bfa',badge:'#EEEDFE',badgeC:'#3C3489'},Makeup:{bg:'#1a0a1a',glow:'rgba(236,72,153,0.28)',ring:'rgba(249,168,212,0.6)',name:'#fce7f3',sub:'#f9a8d4',badge:'#fce7f3',badgeC:'#831843'},Decoration:{bg:'#1a100a',glow:'rgba(251,191,36,0.28)',ring:'rgba(253,230,138,0.6)',name:'#fef3c7',sub:'#fcd34d',badge:'#fef3c7',badgeC:'#92400e'},Catering:{bg:'#0a1a14',glow:'rgba(20,184,166,0.28)',ring:'rgba(94,234,212,0.6)',name:'#ccfbf1',sub:'#5eead4',badge:'#ccfbf1',badgeC:'#134e4a'},default:{bg:'#1a0a2e',glow:'rgba(139,92,246,0.35)',ring:'rgba(167,139,250,0.6)',name:'#e9d5ff',sub:'#a78bfa',badge:'#EEEDFE',badgeC:'#3C3489'}};
-const EMOJIS={'Weddings':'💍','Wedding':'💍','Housewarming':'🏠','Baby Shower':'🍼','Gender Reveal':'🎀','Birthdays':'🎂','Birthday':'🎂','Naming Ceremony':'🪔','Arangetram':'🎭','Annaprashanam':'🌾','Functions':'🎊','Saree Function':'👘','Catering':'🍽️','Poojas':'🪔','All Occasions':'📸'};
+var CLOUDINARY_CLOUD = 'dna65n1rn';
+var CLOUDINARY_PRESET = 'ushindurituals';
+var SHEETS_URL = 'https://script.google.com/macros/s/AKfycbysQUw_DaA7cZAMQ1eM-TQuc2e6qY_EzykvNdSjmW1-2Vv894xdCkDyU-kkVwJZbu1Q/exec';
 
-let vendorCategory='';
+var selectedPhotos = [];
+var logoFile = null;
 
-function parseCSV(text){
-  const lines=text.split('\n');
-  const headers=lines[0].split(',').map(h=>h.trim().replace(/^"|"$/g,''));
-  return lines.slice(1).filter(l=>l.trim()).map(line=>{
-    const values=[];let inQ=false;let val='';
-    for(let i=0;i<line.length;i++){
-      const c=line[i];
-      if(c==='"'){inQ=!inQ;}
-      else if(c===','&&!inQ){values.push(val.trim().replace(/^"|"$/g,''));val='';}
-      else{val+=c;}
-    }
-    values.push(val.trim().replace(/^"|"$/g,''));
-    const obj={};
-    headers.forEach((h,i)=>{obj[h]=values[i]||'';});
-    return obj;
+function previewLogo(input) {
+  var file = input.files[0];
+  if (!file) return;
+  logoFile = file;
+  var reader = new FileReader();
+  reader.onload = function(e) {
+    var img = document.getElementById('logoPreview');
+    img.src = e.target.result;
+    img.style.display = 'block';
+  };
+  reader.readAsDataURL(file);
+}
+
+function previewPhotos(input) {
+  var files = Array.from(input.files).slice(0, 10);
+  selectedPhotos = files;
+  var container = document.getElementById('photoPreviews');
+  container.innerHTML = '';
+  files.forEach(function(file, i) {
+    var reader = new FileReader();
+    reader.onload = function(e) {
+      var div = document.createElement('div');
+      div.className = 'photo-preview';
+      div.innerHTML = '<img src="' + e.target.result + '" alt="Photo ' + (i+1) + '">'
+        + '<button class="remove" onclick="removePhoto(' + i + ')">✕</button>';
+      container.appendChild(div);
+    };
+    reader.readAsDataURL(file);
   });
 }
 
-function goBack(){
-  if(window.opener){
-    window.close();
-  } else {
-    window.location.href=(CAT_PAGES[vendorCategory]||'https://www.ushindurituals.com');
-  }
+function removePhoto(idx) {
+  selectedPhotos.splice(idx, 1);
+  var fakeInput = {files: selectedPhotos};
+  document.getElementById('photoPreviews').innerHTML = '';
+  selectedPhotos.forEach(function(file, i) {
+    var reader = new FileReader();
+    reader.onload = function(e) {
+      var container = document.getElementById('photoPreviews');
+      var div = document.createElement('div');
+      div.className = 'photo-preview';
+      div.innerHTML = '<img src="' + e.target.result + '">'
+        + '<button class="remove" onclick="removePhoto(' + i + ')">✕</button>';
+      container.appendChild(div);
+    };
+    reader.readAsDataURL(file);
+  });
 }
 
-async function loadVendor(){
-  const params=new URLSearchParams(window.location.search);
-  const name=params.get('name');
-  if(!name){window.location.href='index.html';return;}
-  document.title=name+' — US Hindu Rituals';
-  try{
-    const res=await fetch(SHEETS_URL);
-    const all=await res.json();
-    const f=all.find(function(r){return r.Name===name;});
-    if(!f) throw new Error('Vendor not found');
-    renderVendor(f);
-  }catch(e){
-    document.getElementById('loadingWrap').innerHTML=`<p style="color:#ef4444;text-align:center;padding:2rem">⚠️ ${e.message}</p>`;
-  }
-}
-
-function renderVendor(f){
-  vendorCategory=f.Category||'';
-  const catPage=CAT_PAGES[vendorCategory]||'https://www.ushindurituals.com';
-
+async function uploadToCloudinary(file, onProgress) {
+  var formData = new FormData();
+  formData.append('file', file);
+  formData.append('upload_preset', CLOUDINARY_PRESET);
   
-  const t=THEMES[f.Category]||THEMES.default;
-  const services=f.Services?f.Services.split(',').map(s=>{
-    const label=s.trim().replace(/^\p{Emoji}\s*/u,'').trim();
-    const emoji=EMOJIS[label]||'✨';
-    return `<div class="svc-chip"><span class="svc-icon">${emoji}</span><span class="svc-label">${label}</span></div>`;
-  }).join(''):'';
-  const videos=[{id:f.Video1,title:f.Video1_Title||'Video 1'},{id:f.Video2,title:f.Video2_Title||'Video 2'},{id:f.Video3,title:f.Video3_Title||'Video 3'},{id:f.Video4,title:f.Video4_Title||'Video 4'}].filter(v=>v.id&&v.id.trim());
-  const ytSection=videos.length?`<div class="yt-section"><div class="sec-label">▶ Our Work</div><div class="yt-main"><iframe id="ytFrame" src="https://www.youtube.com/embed/${videos[0].id}" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen></iframe></div>${videos.length>1?`<div class="yt-thumbs">${videos.map((v,i)=>`<div class="yt-thumb${i===0?' active':''}" onclick="playVid('${v.id}',this)"><img src="https://img.youtube.com/vi/${v.id}/mqdefault.jpg" loading="lazy"><div class="yt-play-ov"><div class="play-btn"><div class="play-tri"></div></div></div><div class="thumb-title">${v.title}</div></div>`).join('')}</div>`:''}</div>`:'';
-  const phones=[f.Phone1,f.Phone2].filter(p=>p&&p.trim()).map(p=>`<a class="phone-btn" href="tel:${p.replace(/\D/g,'')}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.06 1.22 2 2 0 012 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92z"/></svg>${p}</a>`).join('');
-  const wa=f.WhatsApp&&f.WhatsApp.trim()?`<a class="wa-btn" href="https://wa.me/${f.WhatsApp.replace(/\D/g,'')}" target="_blank"><svg width="18" height="18" viewBox="0 0 32 32" fill="none"><path d="M16 2C8.27 2 2 8.27 2 16c0 2.44.65 4.73 1.78 6.72L2 30l7.5-1.75A13.93 13.93 0 0016 30c7.73 0 14-6.27 14-14S23.73 2 16 2zm6.3 19.88c-.35-.17-2.05-.99-2.37-1.1-.32-.12-.55-.17-.78.17-.23.35-.9 1.1-1.1 1.33-.2.22-.4.25-.75.08-2.07-.97-3.43-1.73-4.8-3.93-.36-.62.36-.58.99-1.93.11-.23.06-.43-.03-.6-.08-.17-.78-1.88-1.07-2.57-.28-.67-.57-.58-.78-.59h-.67c-.23 0-.6.08-.91.43-.32.35-1.2 1.17-1.2 2.85 0 1.68 1.23 3.3 1.4 3.53.17.23 2.4 3.67 5.83 5.15 2.17.93 3.02 1.01 4.1.85.66-.1 2.05-.84 2.34-1.64.29-.8.29-1.49.2-1.64-.08-.14-.3-.22-.65-.4z" fill="white"/></svg>Book Now on WhatsApp</a>`:'';
-  const socials=[f.Facebook&&{href:f.Facebook,label:'Facebook',icon:`<svg viewBox="0 0 24 24" fill="#1877F2"><path d="M24 12.07C24 5.41 18.63 0 12 0S0 5.41 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.04V9.41c0-3.02 1.8-4.7 4.54-4.7 1.31 0 2.68.24 2.68.24v2.97h-1.51c-1.49 0-1.95.93-1.95 1.89v2.26h3.32l-.53 3.5h-2.79V24C19.61 23.1 24 18.1 24 12.07z"/></svg>`},f.Instagram&&{href:f.Instagram,label:'Instagram',icon:`<svg viewBox="0 0 24 24"><defs><radialGradient id="ig" cx="30%" cy="107%" r="150%"><stop offset="0%" stop-color="#fdf497"/><stop offset="45%" stop-color="#fd5949"/><stop offset="60%" stop-color="#d6249f"/><stop offset="90%" stop-color="#285AEB"/></radialGradient></defs><path fill="url(#ig)" d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>`},f.YouTube_Channel&&{href:f.YouTube_Channel,label:'YouTube',icon:`<svg viewBox="0 0 24 24" fill="#FF0000"><path d="M23.495 6.205a3.007 3.007 0 00-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 00.527 6.205a31.247 31.247 0 00-.522 5.805 31.247 31.247 0 00.522 5.783 3.007 3.007 0 002.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 002.088-2.088 31.247 31.247 0 00.5-5.783 31.247 31.247 0 00-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>`},f.Website&&{href:f.Website,label:'Website',icon:`<svg viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>`},f.Email&&{href:`mailto:${f.Email}`,label:'Email',icon:`<svg viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>`}].filter(Boolean);
-  document.getElementById('vendorCard').innerHTML=`<div class="hero" style="background:${t.bg}"><div class="hero-glow" style="background:radial-gradient(ellipse at 50% 0%,${t.glow} 0%,transparent 65%)"></div><div class="logo-ring" style="border-color:${t.ring}"><img src="${f.Logo_URL||FALLBACK}" alt="${f.Name||''}" onerror="this.src='${FALLBACK}'"></div><div class="vendor-name" style="color:${t.name}">${f.Name||''}</div><div class="vendor-sub" style="color:${t.sub}">${f.Category||''}${f.Location?' · '+f.Location:''}</div><div class="stars">★★★★★</div><span class="badge" style="background:${t.badge};color:${t.badgeC}">${f.Location||''}</span></div><div class="body">${f.Tagline?`<p class="tagline">${f.Tagline}</p>`:''} ${services?`<div class="sec-label">Services</div><div class="services">${services}</div>`:''} ${ytSection}<div class="contact"><div class="sec-label">Contact &amp; Connect</div>${phones?`<div class="phones">${phones}</div>`:''} ${wa} ${socials.length?`<div class="social-row">${socials.map(s=>`<a class="soc-btn" href="${s.href}" target="_blank">${s.icon}<span>${s.label}</span></a>`).join('')}</div>`:''}</div></div>`;
-  document.getElementById('loadingWrap').style.display='none';
-  document.getElementById('pageWrap').style.display='flex';
+  return new Promise(function(resolve, reject) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', 'https://api.cloudinary.com/v1_1/' + CLOUDINARY_CLOUD + '/image/upload');
+    xhr.upload.onprogress = function(e) {
+      if (e.lengthComputable && onProgress) {
+        onProgress(Math.round((e.loaded / e.total) * 100));
+      }
+    };
+    xhr.onload = function() {
+      var data = JSON.parse(xhr.responseText);
+      if (data.secure_url) resolve(data.secure_url);
+      else reject(new Error('Upload failed'));
+    };
+    xhr.onerror = function() { reject(new Error('Network error')); };
+    xhr.send(formData);
+  });
 }
 
-function playVid(id,thumb){
-  document.getElementById('ytFrame').src=`https://www.youtube.com/embed/${id}?autoplay=1`;
-  document.querySelectorAll('.yt-thumb').forEach(t=>t.classList.remove('active'));
-  thumb.classList.add('active');
+function extractYouTubeID(url) {
+  if (!url) return '';
+  var patterns = [/youtu\.be\/([a-zA-Z0-9_-]{11})/, /youtube\.com\/watch\?v=([a-zA-Z0-9_-]{11})/];
+  for (var i = 0; i < patterns.length; i++) {
+    var m = url.match(patterns[i]);
+    if (m) return m[1];
+  }
+  return url;
 }
 
-loadVendor();
+function getVal(id) { return document.getElementById(id).value.trim(); }
+
+async function submitForm() {
+  var name = getVal('name');
+  var category = getVal('category');
+  var location = getVal('location');
+  var tagline = getVal('tagline');
+  var phone1 = getVal('phone1');
+
+  if (!name || !category || !location || !tagline || !phone1) {
+    showError('Please fill all required fields (*)');
+    return;
+  }
+
+  var btn = document.getElementById('submitBtn');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="loading"></span>Uploading...';
+  hideError();
+
+  try {
+    // Upload logo
+    var logoUrl = '';
+    if (logoFile) {
+      document.getElementById('progressWrap').style.display = 'block';
+      document.getElementById('progressText').textContent = 'Uploading logo...';
+      document.getElementById('progressFill').style.width = '0%';
+      logoUrl = await uploadToCloudinary(logoFile, function(p) {
+        document.getElementById('progressFill').style.width = p + '%';
+      });
+    }
+
+    // Upload portfolio photos
+    var photoUrls = [];
+    if (selectedPhotos.length > 0) {
+      document.getElementById('progressText').textContent = 'Uploading photos...';
+      for (var i = 0; i < selectedPhotos.length; i++) {
+        var pct = Math.round(((i) / selectedPhotos.length) * 100);
+        document.getElementById('progressFill').style.width = pct + '%';
+        document.getElementById('progressText').textContent = 'Uploading photo ' + (i+1) + ' of ' + selectedPhotos.length + '...';
+        var url = await uploadToCloudinary(selectedPhotos[i]);
+        photoUrls.push(url);
+      }
+      document.getElementById('progressFill').style.width = '100%';
+    }
+
+    btn.innerHTML = '<span class="loading"></span>Saving...';
+
+    // Collect services
+    var services = Array.from(document.querySelectorAll('.svcs-grid input:checked'))
+      .map(function(cb) { return cb.value; }).join(', ');
+
+    // Prepare data for Google Sheets
+    var data = {
+      Name: name,
+      Category: category,
+      Location: location,
+      Tagline: tagline,
+      Phone1: getVal('phone1'),
+      Phone2: getVal('phone2'),
+      WhatsApp: getVal('whatsapp'),
+      Email: getVal('email'),
+      Facebook: getVal('facebook'),
+      Instagram: getVal('instagram'),
+      YouTube_Channel: getVal('youtube'),
+      Website: getVal('website'),
+      Logo_URL: logoUrl,
+      Video1: extractYouTubeID(getVal('video1')),
+      Video1_Title: getVal('video1title'),
+      Video2: extractYouTubeID(getVal('video2')),
+      Video2_Title: getVal('video2title'),
+      Video3: extractYouTubeID(getVal('video3')),
+      Video3_Title: getVal('video3title'),
+      Video4: extractYouTubeID(getVal('video4')),
+      Video4_Title: getVal('video4title'),
+      Services: services,
+      Photos: photoUrls.join(','),
+      Status: 'Pending'
+    };
+
+    // Submit to Google Sheets via Apps Script
+    await fetch(SHEETS_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      body: JSON.stringify(data)
+    });
+
+    document.getElementById('progressWrap').style.display = 'none';
+    document.getElementById('formContent').style.display = 'none';
+    document.getElementById('successMsg').style.display = 'block';
+
+  } catch(e) {
+    showError('Error: ' + e.message);
+    btn.disabled = false;
+    btn.innerHTML = 'Submit for Approval';
+    document.getElementById('progressWrap').style.display = 'none';
+  }
+}
+
+function showError(msg) {
+  var el = document.getElementById('errorMsg');
+  el.textContent = msg;
+  el.style.display = 'block';
+}
+function hideError() {
+  document.getElementById('errorMsg').style.display = 'none';
+}
 </script>
 </body>
 </html>
