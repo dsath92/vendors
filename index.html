@@ -3,147 +3,156 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Vendor Profile</title>
+<title>Our Experts — US Hindu Rituals</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-*{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f5f5;min-height:100vh;}
-.top-bar{background:#fff;border-bottom:1px solid #e0e0e0;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,0.06);}
-.back-btn{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:500;color:#555;cursor:pointer;background:none;border:none;font-family:inherit;}
-.back-btn:hover{color:#E8670A;}
-.all-btn{font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:#E8670A;text-decoration:none;border:1px solid #E8670A;padding:6px 16px;border-radius:999px;transition:all 0.2s;}
-.all-btn:hover{background:#E8670A;color:#fff;}
-.loading-wrap{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:80vh;color:#888;}
-.spinner{width:44px;height:44px;border:3px solid #e0e0e0;border-top-color:#7c3aed;border-radius:50%;animation:spin 0.7s linear infinite;margin-bottom:16px;}
+:root{--saffron:#E8670A;--saffron-glow:rgba(232,103,10,0.12);--gold:#C8961A;--gold-light:#F0BF40;--deep:#140A00;--cream:#FDF7EF;--warm:#F7EDD8;--border:rgba(200,150,26,0.18);--border-hover:rgba(232,103,10,0.32);--overlay:rgba(14,7,0,0.68);--text-muted:#8a7e72;--text-body:#4a3f32;}
+*{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+body{background:var(--cream);color:var(--deep);font-family:'Outfit',sans-serif;-webkit-font-smoothing:antialiased;}
+.hero{position:relative;background:linear-gradient(var(--overlay),var(--overlay)),url('https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1800&q=80') center/cover no-repeat;padding:90px 24px 88px;text-align:center;color:#fff;overflow:hidden;}
+.hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:72px;background:linear-gradient(to top,var(--cream),transparent);pointer-events:none;}
+.hero-eyebrow{font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--gold-light);margin-bottom:22px;font-weight:500;display:flex;align-items:center;justify-content:center;gap:14px;}
+.hero-eyebrow::before,.hero-eyebrow::after{content:'';width:36px;height:1px;background:rgba(240,191,64,0.4);}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(44px,6.5vw,74px);font-weight:700;line-height:1.06;margin-bottom:20px;}
+.hero h1 em{font-style:italic;color:var(--gold-light);font-weight:500;}
+.hero p{max-width:500px;margin:0 auto 34px;color:rgba(255,255,255,0.65);line-height:1.9;font-size:15px;font-weight:300;}
+.hero-pills{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+.hero-pill{background:rgba(255,255,255,0.09);border:1px solid rgba(255,255,255,0.16);color:rgba(255,255,255,0.78);font-size:11px;letter-spacing:1.2px;text-transform:uppercase;padding:7px 16px;border-radius:999px;font-weight:500;}
+.filters-wrap{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;padding:14px 20px;background:rgba(253,247,239,0.98);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;backdrop-filter:blur(20px);}
+.filter-btn{padding:8px 20px;border:1px solid rgba(200,150,26,0.28);border-radius:999px;cursor:pointer;background:transparent;font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-body);transition:all 0.2s;font-family:'Outfit',sans-serif;}
+.filter-btn:hover{border-color:var(--saffron);color:var(--saffron);background:var(--saffron-glow);}
+.filter-btn.active{background:var(--saffron);color:#fff;border-color:var(--saffron);}
+.main-section{max-width:1400px;margin:0 auto;padding:48px 20px 80px;}
+.section-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:32px;gap:16px;}
+.section-eyebrow{font-size:10px;letter-spacing:3.5px;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:7px;}
+.section-title{font-family:'Playfair Display',serif;font-size:30px;font-weight:700;color:var(--deep);line-height:1.1;}
+.section-title em{font-style:italic;color:var(--saffron);}
+.count-pill{background:var(--warm);border:1px solid var(--border);border-radius:999px;padding:7px 16px;font-size:12px;color:var(--text-muted);font-weight:500;white-space:nowrap;}
+.count-pill b{color:var(--deep);font-weight:700;}
+.expert-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+@media(max-width:1100px){.expert-grid{grid-template-columns:repeat(3,1fr);}}
+@media(max-width:760px){.expert-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:480px){.expert-grid{grid-template-columns:1fr;}}
+.expert-card{display:flex;flex-direction:column;cursor:pointer;background:#fff;border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:transform 0.28s,box-shadow 0.28s;animation:fadeUp 0.5s ease both;}
+.expert-card:hover{transform:translateY(-5px);box-shadow:0 18px 44px rgba(0,0,0,0.09);}
+.card-photo-wrap{position:relative;width:100%;height:170px;background:var(--warm);overflow:hidden;}
+.card-photo{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.55s;}
+.card-photo.is-logo{object-fit:contain;padding:22px;background:#fff;}
+.expert-card:hover .card-photo{transform:scale(1.06);}
+.photo-cat{position:absolute;bottom:10px;left:10px;background:rgba(20,10,0,0.72);color:var(--gold-light);font-size:8px;font-weight:600;letter-spacing:2px;text-transform:uppercase;padding:4px 10px;border-radius:999px;}
+.card-body{padding:16px 15px 18px;display:flex;flex-direction:column;flex:1;}
+.card-name{font-family:'Playfair Display',serif;font-size:16px;font-weight:700;margin-bottom:8px;color:var(--deep);}
+.card-meta{display:flex;align-items:center;gap:7px;margin-bottom:10px;flex-wrap:wrap;}
+.verified{display:inline-flex;align-items:center;gap:4px;font-size:9px;color:#1e7a47;border:1px solid rgba(30,122,71,0.26);background:rgba(30,122,71,0.07);padding:3px 8px;border-radius:999px;font-weight:600;}
+.verified::before{content:'✓';font-size:8px;}
+.loc{font-size:10px;color:var(--text-muted);display:inline-flex;align-items:center;gap:4px;}
+.loc::before{content:'◎';font-size:8px;color:var(--saffron);}
+.card-desc{font-size:12px;color:var(--text-body);line-height:1.7;flex:1;margin-bottom:13px;}
+.card-cta{display:inline-flex;align-items:center;gap:6px;font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--saffron);}
+.card-cta::after{content:'→';}
+.loading-state{grid-column:1/-1;text-align:center;padding:60px 20px;color:var(--text-muted);}
+.spinner{width:36px;height:36px;border:3px solid var(--border);border-top-color:var(--saffron);border-radius:50%;animation:spin 0.7s linear infinite;margin:0 auto 16px;}
 @keyframes spin{to{transform:rotate(360deg);}}
-.page-wrap{display:flex;justify-content:center;padding:2rem 1rem 4rem;}
-.vendor-card{background:#fff;border:0.5px solid #e0e0e0;border-radius:16px;overflow:hidden;width:100%;max-width:860px;box-shadow:0 4px 24px rgba(0,0,0,0.08);}
-.hero{padding:2.5rem 2rem 2rem;text-align:center;position:relative;overflow:hidden;}
-.hero-glow{position:absolute;top:0;left:0;right:0;bottom:0;pointer-events:none;}
-.logo-ring{width:96px;height:96px;border-radius:50%;border:2px solid rgba(255,255,255,0.5);background:#fff;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;position:relative;z-index:1;overflow:hidden;}
-.logo-ring img{width:86px;height:86px;object-fit:contain;}
-.vendor-name{font-size:22px;font-weight:500;position:relative;z-index:1;letter-spacing:0.02em;}
-.vendor-sub{font-size:14px;margin-top:5px;position:relative;z-index:1;opacity:0.85;}
-.stars{display:flex;justify-content:center;gap:4px;margin-top:10px;position:relative;z-index:1;}
-.star{color:#fbbf24;font-size:16px;}
-.badge{display:inline-block;font-size:11px;padding:3px 12px;border-radius:99px;margin-top:8px;font-weight:500;position:relative;z-index:1;}
-.body{padding:1.75rem;}
-.tagline{font-size:14px;color:#666;line-height:1.7;text-align:center;border-bottom:0.5px solid #e0e0e0;padding-bottom:1.25rem;margin-bottom:1.5rem;}
-.sec-label{font-size:11px;font-weight:500;color:#888;text-transform:uppercase;letter-spacing:0.07em;margin-bottom:10px;text-align:center;}
-.services{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:1.75rem;}
-@media(max-width:600px){.services{grid-template-columns:repeat(2,1fr);}}
-.svc-chip{background:#f8f8f8;border:0.5px solid #e0e0e0;border-radius:8px;padding:10px 8px;display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;}
-.svc-icon{font-size:20px;}
-.svc-label{font-size:11px;color:#555;font-weight:500;line-height:1.3;}
-.yt-section{margin-bottom:1.75rem;}
-.yt-main{border-radius:10px;overflow:hidden;aspect-ratio:16/9;background:#000;margin-bottom:10px;}
-.yt-main iframe{width:100%;height:100%;border:none;display:block;}
-.yt-thumbs{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;}
-.yt-thumb{border-radius:8px;overflow:hidden;aspect-ratio:16/9;cursor:pointer;position:relative;border:2px solid transparent;transition:border 0.15s;}
-.yt-thumb.active{border-color:#7c3aed;}
-.yt-thumb:hover{opacity:0.85;}
-.yt-thumb img{width:100%;height:100%;object-fit:cover;display:block;}
-.yt-play-ov{position:absolute;inset:0;background:rgba(0,0,0,0.3);display:flex;align-items:center;justify-content:center;}
-.play-btn{width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,0.92);display:flex;align-items:center;justify-content:center;}
-.play-tri{width:0;height:0;border-top:8px solid transparent;border-bottom:8px solid transparent;border-left:13px solid #7c3aed;margin-left:3px;}
-.thumb-title{position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,0.65);color:#fff;font-size:10px;padding:4px 6px;line-height:1.3;}
-.contact{border-top:0.5px solid #e0e0e0;padding-top:1.5rem;}
-.phones{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px;}
-.phone-btn{display:flex;align-items:center;justify-content:center;gap:8px;padding:12px;border-radius:8px;background:#f8f8f8;border:0.5px solid #e0e0e0;font-size:13px;font-weight:500;color:#222;text-decoration:none;}
-.phone-btn:hover{background:#efefef;}
-.wa-btn{display:flex;align-items:center;justify-content:center;gap:8px;padding:12px;border-radius:8px;background:#25D366;font-size:13px;font-weight:600;color:#fff;text-decoration:none;margin-bottom:8px;}
-.wa-btn:hover{background:#1ebe5d;}
-.social-row{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;}
-.soc-btn{display:flex;flex-direction:column;align-items:center;gap:5px;padding:10px 6px;background:#f8f8f8;border:0.5px solid #e0e0e0;border-radius:8px;text-decoration:none;transition:background 0.15s;}
-.soc-btn:hover{background:#ede9fe;}
-.soc-btn span{font-size:11px;color:#555;font-weight:500;}
-.soc-btn svg{width:22px;height:22px;}
+.empty-state{grid-column:1/-1;text-align:center;padding:80px 20px;color:var(--text-muted);font-size:15px;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:translateY(0);}}
 </style>
 </head>
 <body>
-<div class="top-bar">
-  <button class="back-btn" onclick="goBack()">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><polyline points="15 18 9 12 15 6"></polyline></svg>
-    Back
-  </button>
-  <a class="all-btn" id="allBtn" href="https://www.ushindurituals.com/photo-video">All Vendors</a>
+<div class="hero">
+  <div class="hero-eyebrow">US Hindu Rituals</div>
+  <h1>Meet Our<br><em>Trusted Experts</em></h1>
+  <p>Handpicked specialists for Hindu weddings and celebrations across Bentonville &amp; Tulsa.</p>
+  <div class="hero-pills">
+    <span class="hero-pill">Photography</span>
+    <span class="hero-pill">Decoration</span>
+    <span class="hero-pill">Makeup</span>
+  </div>
 </div>
-<div class="loading-wrap" id="loadingWrap"><div class="spinner"></div><p>Loading profile...</p></div>
-<div class="page-wrap" id="pageWrap" style="display:none;"><div class="vendor-card" id="vendorCard"></div></div>
+<div class="filters-wrap">
+  <button class="filter-btn active" data-cat="All" onclick="filterExperts('All',this)">All</button>
+  <button class="filter-btn" data-cat="Photography" onclick="filterExperts('Photography',this)">Photography</button>
+  <button class="filter-btn" data-cat="Makeup" onclick="filterExperts('Makeup',this)">Makeup</button>
+  <button class="filter-btn" data-cat="Decoration" onclick="filterExperts('Decoration',this)">Decoration</button>
+  <button class="filter-btn" data-cat="Catering" onclick="filterExperts('Catering',this)">Catering</button>
+  <button class="filter-btn" data-cat="Priest / Pandit" onclick="filterExperts('Priest / Pandit',this)">Priest</button>
+  <button class="filter-btn" data-cat="Other" onclick="filterExperts('Other',this)">Other</button>
+</div>
+<div class="main-section">
+  <div class="section-header">
+    <div>
+      <div class="section-eyebrow">Handpicked for you</div>
+      <div class="section-title">Our <em>Experts</em></div>
+    </div>
+    <div class="count-pill"><b id="countNum">0</b> Experts</div>
+  </div>
+  <div class="expert-grid" id="expertGrid">
+    <div class="loading-state"><div class="spinner"></div><p>Loading experts...</p></div>
+  </div>
+</div>
 <script>
-const SHEETS_URL='https://opensheet.elk.sh/1CaYOuLNAU3b-MIm-8lAXiH8RZErrI2n3epzrr4W6T1o/1';
-const FALLBACK='https://images.unsplash.com/photo-1470509037663-253afd7f0f51?auto=format&fit=crop&w=600&q=80';
-const CAT_PAGES={'Photography':'https://www.ushindurituals.com/photo-video','Decoration':'https://www.ushindurituals.com/decoration-service','Makeup':'https://www.ushindurituals.com/find-your-makeup-artist','Catering':'https://www.ushindurituals.com','Priest / Pandit':'https://www.ushindurituals.com','Other':'https://www.ushindurituals.com'};
-const THEMES={Photography:{bg:'#1a0a2e',glow:'rgba(139,92,246,0.35)',ring:'rgba(167,139,250,0.6)',name:'#e9d5ff',sub:'#a78bfa',badge:'#EEEDFE',badgeC:'#3C3489'},Makeup:{bg:'#1a0a1a',glow:'rgba(236,72,153,0.28)',ring:'rgba(249,168,212,0.6)',name:'#fce7f3',sub:'#f9a8d4',badge:'#fce7f3',badgeC:'#831843'},Decoration:{bg:'#1a100a',glow:'rgba(251,191,36,0.28)',ring:'rgba(253,230,138,0.6)',name:'#fef3c7',sub:'#fcd34d',badge:'#fef3c7',badgeC:'#92400e'},Catering:{bg:'#0a1a14',glow:'rgba(20,184,166,0.28)',ring:'rgba(94,234,212,0.6)',name:'#ccfbf1',sub:'#5eead4',badge:'#ccfbf1',badgeC:'#134e4a'},default:{bg:'#1a0a2e',glow:'rgba(139,92,246,0.35)',ring:'rgba(167,139,250,0.6)',name:'#e9d5ff',sub:'#a78bfa',badge:'#EEEDFE',badgeC:'#3C3489'}};
-const EMOJIS={'Weddings':'💍','Wedding':'💍','Housewarming':'🏠','Baby Shower':'🍼','Gender Reveal':'🎀','Birthdays':'🎂','Birthday':'🎂','Naming Ceremony':'🪔','Arangetram':'🎭','Annaprashanam':'🌾','Functions':'🎊','Saree Function':'👘','Catering':'🍽️','Poojas':'🪔','All Occasions':'📸'};
+var SHEETS_URL='https://opensheet.elk.sh/1CaYOuLNAU3b-MIm-8lAXiH8RZErrI2n3epzrr4W6T1o/1';
+var VENDOR_PAGE='https://dsath92.github.io/vendors/vendor.html';
+var FALLBACK='https://images.unsplash.com/photo-1470509037663-253afd7f0f51?auto=format&fit=crop&w=600&q=80';
+var allExperts=[];
 
-let vendorCategory='';
+// JSON mode - no CSV parse needed
 
-function parseCSV(text){
-  const lines=text.split('\n');
-  const headers=lines[0].split(',').map(h=>h.trim().replace(/^"|"$/g,''));
-  return lines.slice(1).filter(l=>l.trim()).map(line=>{
-    const values=[];let inQ=false;let val='';
-    for(let i=0;i<line.length;i++){
-      const c=line[i];
-      if(c==='"'){inQ=!inQ;}
-      else if(c===','&&!inQ){values.push(val.trim().replace(/^"|"$/g,''));val='';}
-      else{val+=c;}
-    }
-    values.push(val.trim().replace(/^"|"$/g,''));
-    const obj={};
-    headers.forEach((h,i)=>{obj[h]=values[i]||'';});
-    return obj;
+function loadExperts(){
+  fetch(SHEETS_URL)
+  .then(function(r){return r.json();})
+  .then(function(data){
+    allExperts=data.filter(function(f){
+      return f.Status&&f.Status.trim().toLowerCase()==='approved';
+    });
+    renderExperts(allExperts);
+  })
+  .catch(function(e){
+    document.getElementById('expertGrid').innerHTML='<div class="empty-state">Could not load vendors: '+e.message+'</div>';
   });
 }
 
-function goBack(){
-  window.top.location.href=(CAT_PAGES[vendorCategory]||'https://www.ushindurituals.com')+'#vendors';
+function filterExperts(cat,btn){
+  document.querySelectorAll('.filter-btn').forEach(function(b){b.classList.remove('active');});
+  btn.classList.add('active');
+  renderExperts(cat==='All'?allExperts:allExperts.filter(function(e){return e.Category===cat;}));
 }
 
-async function loadVendor(){
-  const params=new URLSearchParams(window.location.search);
-  const name=params.get('name');
-  if(!name){window.location.href='index.html';return;}
-  document.title=name+' — US Hindu Rituals';
-  try{
-    const res=await fetch(SHEETS_URL);
-    const all=await res.json();
-    const f=all.find(function(r){return r.Name===name;});
-    if(!f) throw new Error('Vendor not found');
-    renderVendor(f);
-  }catch(e){
-    document.getElementById('loadingWrap').innerHTML=`<p style="color:#ef4444;text-align:center;padding:2rem">⚠️ ${e.message}</p>`;
-  }
+function renderExperts(list){
+  document.getElementById('countNum').textContent=list.length;
+  if(!list.length){document.getElementById('expertGrid').innerHTML='<div class="empty-state">No experts found.</div>';return;}
+  document.getElementById('expertGrid').innerHTML=list.map(function(e,i){
+    var photo=e.Logo_URL||FALLBACK;
+    var isLogo=!!e.Logo_URL;
+    var desc=(e.Tagline||'').substring(0,100)+((e.Tagline||'').length>100?'...':'');
+    return '<div class="expert-card" style="animation-delay:'+(i*0.07)+'s" onclick="goToVendor(\''+e.Name.replace(/'/g,"\\'")+'\')">'
+      +'<div class="card-photo-wrap">'
+      +'<img src="'+photo+'" alt="'+(e.Name||'')+'" class="card-photo'+(isLogo?' is-logo':'')+'" loading="lazy" onerror="this.src=\''+FALLBACK+'\'">'
+      +'<span class="photo-cat">'+(e.Category||'')+'</span>'
+      +'</div>'
+      +'<div class="card-body">'
+      +'<div class="card-name">'+(e.Name||'')+'</div>'
+      +'<div class="card-meta"><span class="verified">Verified Expert</span>'+(e.Location?'<span class="loc">'+e.Location+'</span>':'')+'</div>'
+      +'<div class="card-desc">'+desc+'</div>'
+      +'<div class="card-cta">View Profile</div>'
+      +'</div></div>';
+  }).join('');
 }
 
-function renderVendor(f){
-  vendorCategory=f.Category||'';
-  const catPage=CAT_PAGES[vendorCategory]||'https://www.ushindurituals.com';
-  document.getElementById('allBtn').href=catPage;
-  document.getElementById('allBtn').textContent='All '+vendorCategory+' Vendors';
-  const t=THEMES[f.Category]||THEMES.default;
-  const services=f.Services?f.Services.split(',').map(s=>{
-    const label=s.trim().replace(/^\p{Emoji}\s*/u,'').trim();
-    const emoji=EMOJIS[label]||'✨';
-    return `<div class="svc-chip"><span class="svc-icon">${emoji}</span><span class="svc-label">${label}</span></div>`;
-  }).join(''):'';
-  const videos=[{id:f.Video1,title:f.Video1_Title||'Video 1'},{id:f.Video2,title:f.Video2_Title||'Video 2'},{id:f.Video3,title:f.Video3_Title||'Video 3'},{id:f.Video4,title:f.Video4_Title||'Video 4'}].filter(v=>v.id&&v.id.trim());
-  const ytSection=videos.length?`<div class="yt-section"><div class="sec-label">▶ Our Work</div><div class="yt-main"><iframe id="ytFrame" src="https://www.youtube.com/embed/${videos[0].id}" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen></iframe></div>${videos.length>1?`<div class="yt-thumbs">${videos.map((v,i)=>`<div class="yt-thumb${i===0?' active':''}" onclick="playVid('${v.id}',this)"><img src="https://img.youtube.com/vi/${v.id}/mqdefault.jpg" loading="lazy"><div class="yt-play-ov"><div class="play-btn"><div class="play-tri"></div></div></div><div class="thumb-title">${v.title}</div></div>`).join('')}</div>`:''}</div>`:'';
-  const phones=[f.Phone1,f.Phone2].filter(p=>p&&p.trim()).map(p=>`<a class="phone-btn" href="tel:${p.replace(/\D/g,'')}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.06 1.22 2 2 0 012 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92z"/></svg>${p}</a>`).join('');
-  const wa=f.WhatsApp&&f.WhatsApp.trim()?`<a class="wa-btn" href="https://wa.me/${f.WhatsApp.replace(/\D/g,'')}" target="_blank"><svg width="18" height="18" viewBox="0 0 32 32" fill="none"><path d="M16 2C8.27 2 2 8.27 2 16c0 2.44.65 4.73 1.78 6.72L2 30l7.5-1.75A13.93 13.93 0 0016 30c7.73 0 14-6.27 14-14S23.73 2 16 2zm6.3 19.88c-.35-.17-2.05-.99-2.37-1.1-.32-.12-.55-.17-.78.17-.23.35-.9 1.1-1.1 1.33-.2.22-.4.25-.75.08-2.07-.97-3.43-1.73-4.8-3.93-.36-.62.36-.58.99-1.93.11-.23.06-.43-.03-.6-.08-.17-.78-1.88-1.07-2.57-.28-.67-.57-.58-.78-.59h-.67c-.23 0-.6.08-.91.43-.32.35-1.2 1.17-1.2 2.85 0 1.68 1.23 3.3 1.4 3.53.17.23 2.4 3.67 5.83 5.15 2.17.93 3.02 1.01 4.1.85.66-.1 2.05-.84 2.34-1.64.29-.8.29-1.49.2-1.64-.08-.14-.3-.22-.65-.4z" fill="white"/></svg>Book Now on WhatsApp</a>`:'';
-  const socials=[f.Facebook&&{href:f.Facebook,label:'Facebook',icon:`<svg viewBox="0 0 24 24" fill="#1877F2"><path d="M24 12.07C24 5.41 18.63 0 12 0S0 5.41 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.04V9.41c0-3.02 1.8-4.7 4.54-4.7 1.31 0 2.68.24 2.68.24v2.97h-1.51c-1.49 0-1.95.93-1.95 1.89v2.26h3.32l-.53 3.5h-2.79V24C19.61 23.1 24 18.1 24 12.07z"/></svg>`},f.Instagram&&{href:f.Instagram,label:'Instagram',icon:`<svg viewBox="0 0 24 24"><defs><radialGradient id="ig" cx="30%" cy="107%" r="150%"><stop offset="0%" stop-color="#fdf497"/><stop offset="45%" stop-color="#fd5949"/><stop offset="60%" stop-color="#d6249f"/><stop offset="90%" stop-color="#285AEB"/></radialGradient></defs><path fill="url(#ig)" d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>`},f.YouTube_Channel&&{href:f.YouTube_Channel,label:'YouTube',icon:`<svg viewBox="0 0 24 24" fill="#FF0000"><path d="M23.495 6.205a3.007 3.007 0 00-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 00.527 6.205a31.247 31.247 0 00-.522 5.805 31.247 31.247 0 00.522 5.783 3.007 3.007 0 002.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 002.088-2.088 31.247 31.247 0 00.5-5.783 31.247 31.247 0 00-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>`},f.Website&&{href:f.Website,label:'Website',icon:`<svg viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>`},f.Email&&{href:`mailto:${f.Email}`,label:'Email',icon:`<svg viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>`}].filter(Boolean);
-  document.getElementById('vendorCard').innerHTML=`<div class="hero" style="background:${t.bg}"><div class="hero-glow" style="background:radial-gradient(ellipse at 50% 0%,${t.glow} 0%,transparent 65%)"></div><div class="logo-ring" style="border-color:${t.ring}"><img src="${f.Logo_URL||FALLBACK}" alt="${f.Name||''}" onerror="this.src='${FALLBACK}'"></div><div class="vendor-name" style="color:${t.name}">${f.Name||''}</div><div class="vendor-sub" style="color:${t.sub}">${f.Category||''}${f.Location?' · '+f.Location:''}</div><div class="stars">★★★★★</div><span class="badge" style="background:${t.badge};color:${t.badgeC}">${f.Location||''}</span></div><div class="body">${f.Tagline?`<p class="tagline">${f.Tagline}</p>`:''} ${services?`<div class="sec-label">Services</div><div class="services">${services}</div>`:''} ${ytSection}<div class="contact"><div class="sec-label">Contact &amp; Connect</div>${phones?`<div class="phones">${phones}</div>`:''} ${wa} ${socials.length?`<div class="social-row">${socials.map(s=>`<a class="soc-btn" href="${s.href}" target="_blank">${s.icon}<span>${s.label}</span></a>`).join('')}</div>`:''}</div></div>`;
-  document.getElementById('loadingWrap').style.display='none';
-  document.getElementById('pageWrap').style.display='flex';
+function goToVendor(name){
+  window.top.location.href=VENDOR_PAGE+'?name='+encodeURIComponent(name);
 }
 
-function playVid(id,thumb){
-  document.getElementById('ytFrame').src=`https://www.youtube.com/embed/${id}?autoplay=1`;
-  document.querySelectorAll('.yt-thumb').forEach(t=>t.classList.remove('active'));
-  thumb.classList.add('active');
-}
+loadExperts();
+setInterval(loadExperts,120000);
 
-loadVendor();
+// Auto filter based on URL parameter
+var urlCat=new URLSearchParams(window.location.search).get('cat');
+if(urlCat){
+  setTimeout(function(){
+    var btn=document.querySelector('.filter-btn[data-cat="'+urlCat+'"]');
+    if(btn){filterExperts(urlCat,btn);}
+  },1000);
+}
 </script>
 </body>
 </html>
