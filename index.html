@@ -139,7 +139,7 @@ function renderExperts(list){
 }
 
 function goToVendor(name){
-  window.top.location.href=VENDOR_PAGE+'?name='+encodeURIComponent(name);
+  window.open(VENDOR_PAGE+'?name='+encodeURIComponent(name),'_blank');
 }
 
 loadExperts();
