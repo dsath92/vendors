@@ -220,7 +220,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 <script>
 var CLOUDINARY_CLOUD = 'dna65n1rn';
 var CLOUDINARY_PRESET = 'ushindurituals';
-var SHEETS_URL = 'https://script.google.com/macros/s/AKfycbysQUw_DaA7cZAMQ1eM-TQuc2e6qY_EzykvNdSjmW1-2Vv894xdCkDyU-kkVwJZbu1Q/exec';
+var SHEETS_URL = 'https://script.google.com/macros/s/AKfycbyadziHn1cldAYLYR0xXCw375oyMV2uWB55PWYDwiRsVylAseXBFRHXPBXmTLmy6PE/exec';
 
 var selectedPhotos = [];
 var logoFile = null;
@@ -387,8 +387,9 @@ async function submitForm() {
     };
 
     // Submit to Google Sheets via Apps Script
-    var res = await fetch(SHEETS_URL, {
+    await fetch(SHEETS_URL, {
       method: 'POST',
+      mode: 'no-cors',
       body: JSON.stringify(data)
     });
 
