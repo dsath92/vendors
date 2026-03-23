@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vendor Registration — US Hindu Rituals</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f5f5;min-height:100vh;padding:2rem 1rem;}
+.container{max-width:680px;margin:0 auto;}
+.header{background:#1a0a2e;border-radius:16px 16px 0 0;padding:2rem;text-align:center;position:relative;overflow:hidden;}
+.header::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(ellipse at 50% 0%,rgba(139,92,246,0.35) 0%,transparent 65%);}
+.header h1{color:#e9d5ff;font-size:22px;font-weight:500;position:relative;z-index:1;}
+.header p{color:#a78bfa;font-size:13px;margin-top:6px;position:relative;z-index:1;}
+.form-body{background:#fff;border-radius:0 0 16px 16px;padding:2rem;box-shadow:0 4px 24px rgba(0,0,0,0.08);}
+.sec-title{font-size:11px;font-weight:600;color:#7c3aed;text-transform:uppercase;letter-spacing:0.08em;margin:1.5rem 0 1rem;padding-bottom:6px;border-bottom:1px solid #ede9fe;}
+.sec-title:first-child{margin-top:0;}
+.field{margin-bottom:1rem;}
+.field label{display:block;font-size:12px;font-weight:500;color:#444;margin-bottom:5px;}
+.field label .req{color:#ef4444;margin-left:2px;}
+.field input,.field select,.field textarea{width:100%;padding:10px 12px;border:1px solid #e0e0e0;border-radius:8px;font-size:13px;color:#222;background:#fafafa;font-family:inherit;}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:#7c3aed;background:#fff;}
+.field textarea{resize:vertical;min-height:80px;}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+@media(max-width:500px){.row2{grid-template-columns:1fr;}}
+.hint{font-size:11px;color:#888;margin-top:4px;}
+
+/* Logo upload */
+.logo-area{border:2px dashed #c4b5fd;border-radius:10px;padding:1.5rem;text-align:center;cursor:pointer;background:#faf5ff;position:relative;}
+.logo-area input{position:absolute;inset:0;opacity:0;cursor:pointer;}
+.logo-area p{font-size:13px;color:#7c3aed;font-weight:500;}
+.logo-area small{font-size:11px;color:#888;}
+#logoPreview{display:none;width:80px;height:80px;border-radius:50%;object-fit:contain;border:2px solid #c4b5fd;margin:10px auto 0;}
+
+/* Photo gallery upload */
+.photos-area{border:2px dashed #c4b5fd;border-radius:10px;padding:1.5rem;text-align:center;cursor:pointer;background:#faf5ff;position:relative;}
+.photos-area input{position:absolute;inset:0;opacity:0;cursor:pointer;}
+.photos-area p{font-size:13px;color:#7c3aed;font-weight:500;}
+.photos-area small{font-size:11px;color:#888;}
+.photo-previews{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-top:12px;}
+.photo-preview{aspect-ratio:1;border-radius:8px;overflow:hidden;position:relative;}
+.photo-preview img{width:100%;height:100%;object-fit:cover;}
+.photo-preview .remove{position:absolute;top:2px;right:2px;background:rgba(0,0,0,0.6);color:#fff;border:none;border-radius:50%;width:18px;height:18px;font-size:11px;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+
+/* Services */
+.svcs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
+@media(max-width:500px){.svcs-grid{grid-template-columns:repeat(2,1fr);}}
+.svc-check{display:flex;align-items:center;gap:6px;padding:8px 10px;background:#f8f8f8;border:1px solid #e0e0e0;border-radius:8px;cursor:pointer;}
+.svc-check input{accent-color:#7c3aed;width:14px;height:14px;}
+.svc-check span{font-size:12px;color:#444;font-weight:500;}
+
+/* Progress */
+.progress-wrap{margin-bottom:1rem;display:none;}
+.progress-bar{height:6px;background:#ede9fe;border-radius:99px;overflow:hidden;}
+.progress-fill{height:100%;background:#7c3aed;border-radius:99px;transition:width 0.3s;width:0%;}
+.progress-text{font-size:11px;color:#7c3aed;margin-top:4px;text-align:center;}
+
+.submit-btn{width:100%;padding:14px;background:#7c3aed;color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:600;cursor:pointer;margin-top:1.5rem;}
+.submit-btn:hover{background:#6d28d9;}
+.submit-btn:disabled{background:#c4b5fd;cursor:not-allowed;}
+.error-msg{background:#fef2f2;border:1px solid #fecaca;color:#dc2626;padding:10px 14px;border-radius:8px;font-size:13px;margin-top:1rem;display:none;}
+.success-msg{display:none;text-align:center;padding:2rem;}
+.success-msg .icon{font-size:48px;}
+.success-msg h2{color:#16a34a;margin:1rem 0 0.5rem;}
+.success-msg p{color:#666;font-size:14px;}
+.loading{display:inline-block;width:16px;height:16px;border:2px solid #fff;border-top-color:transparent;border-radius:50%;animation:spin 0.6s linear infinite;vertical-align:middle;margin-right:6px;}
+@keyframes spin{to{transform:rotate(360deg);}}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <h1>🪔 Vendor Registration</h1>
+    <p>US Hindu Rituals — Join our vendor directory</p>
+  </div>
+  <div class="form-body">
+    <div id="formContent">
+
+      <div class="sec-title">Basic Information</div>
+      <div class="field">
+        <label>Business Name <span class="req">*</span></label>
+        <input type="text" id="name" placeholder="e.g. Vian Photography" required>
+      </div>
+      <div class="row2">
+        <div class="field">
+          <label>Category <span class="req">*</span></label>
+          <select id="category" required>
+            <option value="">Select category</option>
+            <option>Photography</option>
+            <option>Makeup</option>
+            <option>Decoration</option>
+            <option>Catering</option>
+            <option>Priest / Pandit</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Location <span class="req">*</span></label>
+          <input type="text" id="location" placeholder="e.g. Bentonville, AR">
+        </div>
+      </div>
+      <div class="field">
+        <label>About Us <span class="req">*</span></label>
+        <textarea id="tagline" placeholder="Briefly describe your services..."></textarea>
+      </div>
+
+      <div class="sec-title">Logo / Profile Photo</div>
+      <div class="field">
+        <div class="logo-area" id="logoArea">
+          <input type="file" id="logoFile" accept="image/*" onchange="previewLogo(this)">
+          <div class="icon" style="font-size:32px;margin-bottom:8px;">📷</div>
+          <p>Click to upload logo</p>
+          <small>JPG, PNG, WEBP — max 5MB</small>
+        </div>
+        <img id="logoPreview" src="" alt="Logo preview">
+      </div>
+
+      <div class="sec-title">Portfolio Photos</div>
+      <div class="field">
+        <div class="photos-area">
+          <input type="file" id="photosFile" accept="image/*" multiple onchange="previewPhotos(this)">
+          <div style="font-size:28px;margin-bottom:8px;">🖼️</div>
+          <p>Click to upload portfolio photos</p>
+          <small>Max 10 photos • JPG, PNG, WEBP</small>
+        </div>
+        <div class="photo-previews" id="photoPreviews"></div>
+        <div class="progress-wrap" id="progressWrap">
+          <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+          <div class="progress-text" id="progressText">Uploading...</div>
+        </div>
+      </div>
+
+      <div class="sec-title">Contact Details</div>
+      <div class="row2">
+        <div class="field">
+          <label>Phone 1 <span class="req">*</span></label>
+          <input type="tel" id="phone1" placeholder="+1 (512) 736-8124">
+        </div>
+        <div class="field">
+          <label>Phone 2</label>
+          <input type="tel" id="phone2" placeholder="+1 (337) 465-2654">
+        </div>
+      </div>
+      <div class="row2">
+        <div class="field">
+          <label>WhatsApp</label>
+          <input type="tel" id="whatsapp" placeholder="+1 (512) 736-8124">
+        </div>
+        <div class="field">
+          <label>Email</label>
+          <input type="email" id="email" placeholder="example@gmail.com">
+        </div>
+      </div>
+
+      <div class="sec-title">Social Media & Links</div>
+      <div class="field">
+        <label>Facebook URL</label>
+        <input type="url" id="facebook" placeholder="https://facebook.com/...">
+      </div>
+      <div class="field">
+        <label>Instagram URL</label>
+        <input type="url" id="instagram" placeholder="https://instagram.com/...">
+      </div>
+      <div class="field">
+        <label>YouTube Channel URL</label>
+        <input type="url" id="youtube" placeholder="https://youtube.com/@...">
+      </div>
+      <div class="field">
+        <label>Website URL</label>
+        <input type="url" id="website" placeholder="https://...">
+      </div>
+
+      <div class="sec-title">YouTube Videos (Our Work)</div>
+      <p class="hint" style="margin-bottom:12px;">YouTube video link paste చేయండి</p>
+      <div class="row2">
+        <div class="field"><label>Video 1 URL</label><input type="url" id="video1" placeholder="https://youtu.be/..."></div>
+        <div class="field"><label>Video 1 Title</label><input type="text" id="video1title" placeholder="Wedding Film"></div>
+      </div>
+      <div class="row2">
+        <div class="field"><label>Video 2 URL</label><input type="url" id="video2" placeholder="https://youtu.be/..."></div>
+        <div class="field"><label>Video 2 Title</label><input type="text" id="video2title" placeholder="Celebration"></div>
+      </div>
+      <div class="row2">
+        <div class="field"><label>Video 3 URL</label><input type="url" id="video3" placeholder="https://youtu.be/..."></div>
+        <div class="field"><label>Video 3 Title</label><input type="text" id="video3title" placeholder="Event Highlights"></div>
+      </div>
+      <div class="row2">
+        <div class="field"><label>Video 4 URL</label><input type="url" id="video4" placeholder="https://youtu.be/..."></div>
+        <div class="field"><label>Video 4 Title</label><input type="text" id="video4title" placeholder="Special Moments"></div>
+      </div>
+
+      <div class="sec-title">Services Offered</div>
+      <div class="svcs-grid">
+        <label class="svc-check"><input type="checkbox" value="💍 Weddings"><span>💍 Weddings</span></label>
+        <label class="svc-check"><input type="checkbox" value="🏠 Housewarming"><span>🏠 Housewarming</span></label>
+        <label class="svc-check"><input type="checkbox" value="🍼 Baby Shower"><span>🍼 Baby Shower</span></label>
+        <label class="svc-check"><input type="checkbox" value="🎀 Gender Reveal"><span>🎀 Gender Reveal</span></label>
+        <label class="svc-check"><input type="checkbox" value="🎂 Birthdays"><span>🎂 Birthdays</span></label>
+        <label class="svc-check"><input type="checkbox" value="🪔 Naming Ceremony"><span>🪔 Naming Ceremony</span></label>
+        <label class="svc-check"><input type="checkbox" value="🎭 Arangetram"><span>🎭 Arangetram</span></label>
+        <label class="svc-check"><input type="checkbox" value="🌾 Annaprashanam"><span>🌾 Annaprashanam</span></label>
+        <label class="svc-check"><input type="checkbox" value="🎊 Functions"><span>🎊 Functions</span></label>
+        <label class="svc-check"><input type="checkbox" value="👘 Saree Function"><span>👘 Saree Function</span></label>
+        <label class="svc-check"><input type="checkbox" value="🍽️ Catering"><span>🍽️ Catering</span></label>
+        <label class="svc-check"><input type="checkbox" value="📸 All Occasions"><span>📸 All Occasions</span></label>
+      </div>
+
+      <div class="error-msg" id="errorMsg"></div>
+      <button class="submit-btn" id="submitBtn" onclick="submitForm()">Submit for Approval</button>
+    </div>
+
+    <div class="success-msg" id="successMsg">
+      <div class="icon">✅</div>
+      <h2>Submitted Successfully!</h2>
+      <p>మీ details submit అయ్యాయి. Admin approval తర్వాత మీ profile website లో కనిపిస్తుంది.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+var CLOUDINARY_CLOUD = 'dna65n1rn';
+var CLOUDINARY_PRESET = 'ushindurituals';
+var SHEETS_URL = 'https://script.google.com/macros/s/AKfycbysQUw_DaA7cZAMQ1eM-TQuc2e6qY_EzykvNdSjmW1-2Vv894xdCkDyU-kkVwJZbu1Q/exec';
+
+var selectedPhotos = [];
+var logoFile = null;
+
+function previewLogo(input) {
+  var file = input.files[0];
+  if (!file) return;
+  logoFile = file;
+  var reader = new FileReader();
+  reader.onload = function(e) {
+    var img = document.getElementById('logoPreview');
+    img.src = e.target.result;
+    img.style.display = 'block';
+  };
+  reader.readAsDataURL(file);
+}
+
+function previewPhotos(input) {
+  var files = Array.from(input.files).slice(0, 10);
+  selectedPhotos = files;
+  var container = document.getElementById('photoPreviews');
+  container.innerHTML = '';
+  files.forEach(function(file, i) {
+    var reader = new FileReader();
+    reader.onload = function(e) {
+      var div = document.createElement('div');
+      div.className = 'photo-preview';
+      div.innerHTML = '<img src="' + e.target.result + '" alt="Photo ' + (i+1) + '">'
+        + '<button class="remove" onclick="removePhoto(' + i + ')">✕</button>';
+      container.appendChild(div);
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+function removePhoto(idx) {
+  selectedPhotos.splice(idx, 1);
+  var fakeInput = {files: selectedPhotos};
+  document.getElementById('photoPreviews').innerHTML = '';
+  selectedPhotos.forEach(function(file, i) {
+    var reader = new FileReader();
+    reader.onload = function(e) {
+      var container = document.getElementById('photoPreviews');
+      var div = document.createElement('div');
+      div.className = 'photo-preview';
+      div.innerHTML = '<img src="' + e.target.result + '">'
+        + '<button class="remove" onclick="removePhoto(' + i + ')">✕</button>';
+      container.appendChild(div);
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+async function uploadToCloudinary(file, onProgress) {
+  var formData = new FormData();
+  formData.append('file', file);
+  formData.append('upload_preset', CLOUDINARY_PRESET);
+  
+  return new Promise(function(resolve, reject) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', 'https://api.cloudinary.com/v1_1/' + CLOUDINARY_CLOUD + '/image/upload');
+    xhr.upload.onprogress = function(e) {
+      if (e.lengthComputable && onProgress) {
+        onProgress(Math.round((e.loaded / e.total) * 100));
+      }
+    };
+    xhr.onload = function() {
+      var data = JSON.parse(xhr.responseText);
+      if (data.secure_url) resolve(data.secure_url);
+      else reject(new Error('Upload failed'));
+    };
+    xhr.onerror = function() { reject(new Error('Network error')); };
+    xhr.send(formData);
+  });
+}
+
+function extractYouTubeID(url) {
+  if (!url) return '';
+  var patterns = [/youtu\.be\/([a-zA-Z0-9_-]{11})/, /youtube\.com\/watch\?v=([a-zA-Z0-9_-]{11})/];
+  for (var i = 0; i < patterns.length; i++) {
+    var m = url.match(patterns[i]);
+    if (m) return m[1];
+  }
+  return url;
+}
+
+function getVal(id) { return document.getElementById(id).value.trim(); }
+
+async function submitForm() {
+  var name = getVal('name');
+  var category = getVal('category');
+  var location = getVal('location');
+  var tagline = getVal('tagline');
+  var phone1 = getVal('phone1');
+
+  if (!name || !category || !location || !tagline || !phone1) {
+    showError('Please fill all required fields (*)');
+    return;
+  }
+
+  var btn = document.getElementById('submitBtn');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="loading"></span>Uploading...';
+  hideError();
+
+  try {
+    // Upload logo
+    var logoUrl = '';
+    if (logoFile) {
+      document.getElementById('progressWrap').style.display = 'block';
+      document.getElementById('progressText').textContent = 'Uploading logo...';
+      document.getElementById('progressFill').style.width = '0%';
+      logoUrl = await uploadToCloudinary(logoFile, function(p) {
+        document.getElementById('progressFill').style.width = p + '%';
+      });
+    }
+
+    // Upload portfolio photos
+    var photoUrls = [];
+    if (selectedPhotos.length > 0) {
+      document.getElementById('progressText').textContent = 'Uploading photos...';
+      for (var i = 0; i < selectedPhotos.length; i++) {
+        var pct = Math.round(((i) / selectedPhotos.length) * 100);
+        document.getElementById('progressFill').style.width = pct + '%';
+        document.getElementById('progressText').textContent = 'Uploading photo ' + (i+1) + ' of ' + selectedPhotos.length + '...';
+        var url = await uploadToCloudinary(selectedPhotos[i]);
+        photoUrls.push(url);
+      }
+      document.getElementById('progressFill').style.width = '100%';
+    }
+
+    btn.innerHTML = '<span class="loading"></span>Saving...';
+
+    // Collect services
+    var services = Array.from(document.querySelectorAll('.svcs-grid input:checked'))
+      .map(function(cb) { return cb.value; }).join(', ');
+
+    // Prepare data for Google Sheets
+    var data = {
+      Name: name,
+      Category: category,
+      Location: location,
+      Tagline: tagline,
+      Phone1: getVal('phone1'),
+      Phone2: getVal('phone2'),
+      WhatsApp: getVal('whatsapp'),
+      Email: getVal('email'),
+      Facebook: getVal('facebook'),
+      Instagram: getVal('instagram'),
+      YouTube_Channel: getVal('youtube'),
+      Website: getVal('website'),
+      Logo_URL: logoUrl,
+      Video1: extractYouTubeID(getVal('video1')),
+      Video1_Title: getVal('video1title'),
+      Video2: extractYouTubeID(getVal('video2')),
+      Video2_Title: getVal('video2title'),
+      Video3: extractYouTubeID(getVal('video3')),
+      Video3_Title: getVal('video3title'),
+      Video4: extractYouTubeID(getVal('video4')),
+      Video4_Title: getVal('video4title'),
+      Services: services,
+      Photos: photoUrls.join(','),
+      Status: 'Pending'
+    };
+
+    // Submit to Google Sheets via Apps Script
+    var res = await fetch(SHEETS_URL, {
+      method: 'POST',
+      body: JSON.stringify(data)
+    });
+
+    document.getElementById('progressWrap').style.display = 'none';
+    document.getElementById('formContent').style.display = 'none';
+    document.getElementById('successMsg').style.display = 'block';
+
+  } catch(e) {
+    showError('Error: ' + e.message);
+    btn.disabled = false;
+    btn.innerHTML = 'Submit for Approval';
+    document.getElementById('progressWrap').style.display = 'none';
+  }
+}
+
+function showError(msg) {
+  var el = document.getElementById('errorMsg');
+  el.textContent = msg;
+  el.style.display = 'block';
+}
+function hideError() {
+  document.getElementById('errorMsg').style.display = 'none';
+}
+</script>
+</body>
+</html>
