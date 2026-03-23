@@ -130,7 +130,7 @@ async function loadVendor(){
   try{
     const res=await fetch(SHEETS_URL);
     const all=await res.json();
-    const f=all.find(function(r){return r.Name&&r.Name.trim()===name.trim();});
+    const f=all.find(function(r){return r.Name&&r.Name.trim().toLowerCase()===name.trim().toLowerCase();});
     if(!f) throw new Error('Vendor not found');
     renderVendor(f);
   }catch(e){
