@@ -123,7 +123,7 @@ function renderVendor(f){
   vendorCategory=f.Category||'';
   const catPage=CAT_PAGES[vendorCategory]||'https://www.ushindurituals.com';
 
-  document.getElementById('allBtn').textContent='All '+vendorCategory+' Vendors';
+  
   const t=THEMES[f.Category]||THEMES.default;
   const services=f.Services?f.Services.split(',').map(s=>{
     const label=s.trim().replace(/^\p{Emoji}\s*/u,'').trim();
