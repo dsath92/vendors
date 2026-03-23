@@ -107,9 +107,8 @@ async function loadVendor(){
   document.title=name+' — US Hindu Rituals';
   try{
     const res=await fetch(SHEETS_URL);
-    const csv=await res.text();
-    const all=parseCSV(csv);
-    const f=all.find(r=>r.Name===name);
+    const all=await res.json();
+    const f=all.find(function(r){return r.Name===name;});
     if(!f) throw new Error('Vendor not found');
     renderVendor(f);
   }catch(e){
