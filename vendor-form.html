@@ -274,9 +274,34 @@ function removePhoto(idx) {
   });
 }
 
+async function compressImage(file) {
+  return new Promise(function(resolve) {
+    var reader = new FileReader();
+    reader.onload = function(e) {
+      var img = new Image();
+      img.onload = function() {
+        var canvas = document.createElement('canvas');
+        var maxW = 1920, maxH = 1920;
+        var w = img.width, h = img.height;
+        if(w > maxW){ h = h * maxW / w; w = maxW; }
+        if(h > maxH){ w = w * maxH / h; h = maxH; }
+        canvas.width = w;
+        canvas.height = h;
+        canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+        canvas.toBlob(function(blob) {
+          resolve(new File([blob], file.name, {type: 'image/jpeg'}));
+        }, 'image/jpeg', 0.85);
+      };
+      img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
 async function uploadToCloudinary(file, onProgress) {
+  var compressed = await compressImage(file);
   var formData = new FormData();
-  formData.append('file', file);
+  formData.append('file', compressed);
   formData.append('upload_preset', CLOUDINARY_PRESET);
   
   return new Promise(function(resolve, reject) {
