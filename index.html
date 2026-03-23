@@ -90,32 +90,18 @@ body{background:var(--cream);color:var(--deep);font-family:'Outfit',sans-serif;-
   </div>
 </div>
 <script>
-var SHEETS_URL='https://api.allorigins.win/raw?url=https://docs.google.com/spreadsheets/d/1CaYOuLNAU3b-MIm-8lAXiH8RZErrI2n3epzrr4W6T1o/export?format=csv%26gid=351870788';
+var SHEETS_URL='https://opensheet.elk.sh/1CaYOuLNAU3b-MIm-8lAXiH8RZErrI2n3epzrr4W6T1o/1';
 var VENDOR_PAGE='https://dsath92.github.io/vendors/vendor.html';
 var FALLBACK='https://images.unsplash.com/photo-1470509037663-253afd7f0f51?auto=format&fit=crop&w=600&q=80';
 var allExperts=[];
 
-function parseCSV(t){
-  var ls=t.split('\n');
-  var hs=ls[0].split(',').map(function(h){return h.trim().replace(/"/g,'');});
-  return ls.slice(1).filter(function(l){return l.trim();}).map(function(line){
-    var vs=[],inQ=false,v='';
-    for(var i=0;i<line.length;i++){
-      if(line[i]==='"'){inQ=!inQ;}
-      else if(line[i]===','&&!inQ){vs.push(v.trim().replace(/"/g,''));v='';}
-      else{v+=line[i];}
-    }
-    vs.push(v.trim().replace(/"/g,''));
-    var o={};hs.forEach(function(h,i){o[h]=vs[i]||'';});
-    return o;
-  });
-}
+// JSON mode - no CSV parse needed
 
 function loadExperts(){
   fetch(SHEETS_URL)
-  .then(function(r){return r.text();})
-  .then(function(csv){
-    allExperts=parseCSV(csv).filter(function(f){
+  .then(function(r){return r.json();})
+  .then(function(data){
+    allExperts=data.filter(function(f){
       return f.Status&&f.Status.trim().toLowerCase()==='approved';
     });
     renderExperts(allExperts);
