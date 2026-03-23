@@ -6,7 +6,7 @@
 <title>Our Experts — US Hindu Rituals</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{--saffron:#E8670A;--saffron-glow:rgba(232,103,10,0.12);--gold:#C8961A;--gold-light:#F0BF40;--deep:#140A00;--cream:#FDF7EF;--warm:#F7EDD8;--card-bg:#FFFFFF;--border:rgba(200,150,26,0.18);--border-hover:rgba(232,103,10,0.32);--overlay:rgba(14,7,0,0.68);--text-muted:#8a7e72;--text-body:#4a3f32;}
+:root{--saffron:#E8670A;--saffron-glow:rgba(232,103,10,0.12);--gold:#C8961A;--gold-light:#F0BF40;--deep:#140A00;--cream:#FDF7EF;--warm:#F7EDD8;--border:rgba(200,150,26,0.18);--border-hover:rgba(232,103,10,0.32);--overlay:rgba(14,7,0,0.68);--text-muted:#8a7e72;--text-body:#4a3f32;}
 *{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
 body{background:var(--cream);color:var(--deep);font-family:'Outfit',sans-serif;-webkit-font-smoothing:antialiased;}
 .hero{position:relative;background:linear-gradient(var(--overlay),var(--overlay)),url('https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1800&q=80') center/cover no-repeat;padding:90px 24px 88px;text-align:center;color:#fff;overflow:hidden;}
@@ -18,40 +18,38 @@ body{background:var(--cream);color:var(--deep);font-family:'Outfit',sans-serif;-
 .hero p{max-width:500px;margin:0 auto 34px;color:rgba(255,255,255,0.65);line-height:1.9;font-size:15px;font-weight:300;}
 .hero-pills{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
 .hero-pill{background:rgba(255,255,255,0.09);border:1px solid rgba(255,255,255,0.16);color:rgba(255,255,255,0.78);font-size:11px;letter-spacing:1.2px;text-transform:uppercase;padding:7px 16px;border-radius:999px;font-weight:500;}
-.filters-wrap{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;padding:14px 20px;background:rgba(253,247,239,0.98);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);}
+.filters-wrap{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;padding:14px 20px;background:rgba(253,247,239,0.98);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;backdrop-filter:blur(20px);}
 .filter-btn{padding:8px 20px;border:1px solid rgba(200,150,26,0.28);border-radius:999px;cursor:pointer;background:transparent;font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-body);transition:all 0.2s;font-family:'Outfit',sans-serif;}
 .filter-btn:hover{border-color:var(--saffron);color:var(--saffron);background:var(--saffron-glow);}
-.filter-btn.active{background:var(--saffron);color:#fff;border-color:var(--saffron);box-shadow:0 4px 16px rgba(232,103,10,0.26);}
+.filter-btn.active{background:var(--saffron);color:#fff;border-color:var(--saffron);}
 .main-section{max-width:1400px;margin:0 auto;padding:48px 20px 80px;}
 .section-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:32px;gap:16px;}
 .section-eyebrow{font-size:10px;letter-spacing:3.5px;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:7px;}
 .section-title{font-family:'Playfair Display',serif;font-size:30px;font-weight:700;color:var(--deep);line-height:1.1;}
 .section-title em{font-style:italic;color:var(--saffron);}
-.count-pill{background:var(--warm);border:1px solid var(--border);border-radius:999px;padding:7px 16px;font-size:12px;color:var(--text-muted);font-weight:500;white-space:nowrap;flex-shrink:0;}
+.count-pill{background:var(--warm);border:1px solid var(--border);border-radius:999px;padding:7px 16px;font-size:12px;color:var(--text-muted);font-weight:500;white-space:nowrap;}
 .count-pill b{color:var(--deep);font-weight:700;}
 .expert-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
 @media(max-width:1100px){.expert-grid{grid-template-columns:repeat(3,1fr);}}
 @media(max-width:760px){.expert-grid{grid-template-columns:repeat(2,1fr);}}
 @media(max-width:480px){.expert-grid{grid-template-columns:1fr;}}
-.expert-card{display:flex;flex-direction:column;cursor:pointer;background:var(--card-bg);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:transform 0.28s ease,box-shadow 0.28s ease,border-color 0.28s ease;animation:fadeUp 0.5s ease both;}
-.expert-card:hover{transform:translateY(-5px);box-shadow:0 18px 44px rgba(0,0,0,0.09),0 0 0 1px var(--border-hover);border-color:var(--border-hover);}
-.card-photo-wrap{position:relative;width:100%;height:170px;background:var(--warm);overflow:hidden;flex-shrink:0;}
-.card-photo{width:100%;height:100%;object-fit:cover;object-position:center top;display:block;transition:transform 0.55s ease;}
+.expert-card{display:flex;flex-direction:column;cursor:pointer;background:#fff;border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:transform 0.28s,box-shadow 0.28s;animation:fadeUp 0.5s ease both;}
+.expert-card:hover{transform:translateY(-5px);box-shadow:0 18px 44px rgba(0,0,0,0.09);}
+.card-photo-wrap{position:relative;width:100%;height:170px;background:var(--warm);overflow:hidden;}
+.card-photo{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.55s;}
 .card-photo.is-logo{object-fit:contain;padding:22px;background:#fff;}
 .expert-card:hover .card-photo{transform:scale(1.06);}
-.photo-cat{position:absolute;bottom:10px;left:10px;background:rgba(20,10,0,0.72);color:var(--gold-light);font-size:8px;font-weight:600;letter-spacing:2px;text-transform:uppercase;padding:4px 10px;border-radius:999px;backdrop-filter:blur(6px);}
+.photo-cat{position:absolute;bottom:10px;left:10px;background:rgba(20,10,0,0.72);color:var(--gold-light);font-size:8px;font-weight:600;letter-spacing:2px;text-transform:uppercase;padding:4px 10px;border-radius:999px;}
 .card-body{padding:16px 15px 18px;display:flex;flex-direction:column;flex:1;}
-.card-name{font-family:'Playfair Display',serif;font-size:16px;font-weight:700;line-height:1.2;margin-bottom:8px;color:var(--deep);}
+.card-name{font-family:'Playfair Display',serif;font-size:16px;font-weight:700;margin-bottom:8px;color:var(--deep);}
 .card-meta{display:flex;align-items:center;gap:7px;margin-bottom:10px;flex-wrap:wrap;}
 .verified{display:inline-flex;align-items:center;gap:4px;font-size:9px;color:#1e7a47;border:1px solid rgba(30,122,71,0.26);background:rgba(30,122,71,0.07);padding:3px 8px;border-radius:999px;font-weight:600;}
 .verified::before{content:'✓';font-size:8px;}
 .loc{font-size:10px;color:var(--text-muted);display:inline-flex;align-items:center;gap:4px;}
 .loc::before{content:'◎';font-size:8px;color:var(--saffron);}
-.card-desc{font-size:12px;color:var(--text-body);line-height:1.7;font-weight:300;flex:1;margin-bottom:13px;}
-.card-cta{display:inline-flex;align-items:center;gap:6px;font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--saffron);transition:gap 0.2s;}
-.card-cta::after{content:'→';transition:transform 0.2s;}
-.expert-card:hover .card-cta{gap:10px;}
-.expert-card:hover .card-cta::after{transform:translateX(3px);}
+.card-desc{font-size:12px;color:var(--text-body);line-height:1.7;flex:1;margin-bottom:13px;}
+.card-cta{display:inline-flex;align-items:center;gap:6px;font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--saffron);}
+.card-cta::after{content:'→';}
 .loading-state{grid-column:1/-1;text-align:center;padding:60px 20px;color:var(--text-muted);}
 .spinner{width:36px;height:36px;border:3px solid var(--border);border-top-color:var(--saffron);border-radius:50%;animation:spin 0.7s linear infinite;margin:0 auto 16px;}
 @keyframes spin{to{transform:rotate(360deg);}}
@@ -92,62 +90,74 @@ body{background:var(--cream);color:var(--deep);font-family:'Outfit',sans-serif;-
   </div>
 </div>
 <script>
-const TOKEN='pat9gzNJQS1k4W0nR.ff7ad5f5e51c09958c99b38e74485146c3f25a43ad0e4980e43243b9f43aabf6';
-const BASE='appd64uPkgeIGngGl';
-const TABLE='tbliTQRAKGC8aydKJ';
-const FALLBACK='https://images.unsplash.com/photo-1470509037663-253afd7f0f51?auto=format&fit=crop&w=600&q=80';
-let allExperts=[];
+var SHEETS_URL='https://api.allorigins.win/raw?url=https://docs.google.com/spreadsheets/d/1CaYOuLNAU3b-MIm-8lAXiH8RZErrI2n3epzrr4W6T1o/export?format=csv%26gid=351870788';
+var VENDOR_PAGE='https://dsath92.github.io/vendors/vendor.html';
+var FALLBACK='https://images.unsplash.com/photo-1470509037663-253afd7f0f51?auto=format&fit=crop&w=600&q=80';
+var allExperts=[];
 
-async function loadExperts(){
-  try{
-    const res=await fetch(`https://api.airtable.com/v0/${BASE}/${TABLE}`,{headers:{Authorization:`Bearer ${TOKEN}`}});
-    const data=await res.json();
-    if(!res.ok) throw new Error(data.error?.message||res.status);
-    allExperts=(data.records||[]).map(r=>r.fields).filter(f=>String(f.Status||'').trim().toLowerCase()==='approved');
+function parseCSV(t){
+  var ls=t.split('\n');
+  var hs=ls[0].split(',').map(function(h){return h.trim().replace(/"/g,'');});
+  return ls.slice(1).filter(function(l){return l.trim();}).map(function(line){
+    var vs=[],inQ=false,v='';
+    for(var i=0;i<line.length;i++){
+      if(line[i]==='"'){inQ=!inQ;}
+      else if(line[i]===','&&!inQ){vs.push(v.trim().replace(/"/g,''));v='';}
+      else{v+=line[i];}
+    }
+    vs.push(v.trim().replace(/"/g,''));
+    var o={};hs.forEach(function(h,i){o[h]=vs[i]||'';});
+    return o;
+  });
+}
+
+function loadExperts(){
+  fetch(SHEETS_URL)
+  .then(function(r){return r.text();})
+  .then(function(csv){
+    allExperts=parseCSV(csv).filter(function(f){
+      return f.Status&&f.Status.trim().toLowerCase()==='approved';
+    });
     renderExperts(allExperts);
-  }catch(e){
-    document.getElementById('expertGrid').innerHTML=`<div class="empty-state">⚠️ Could not load vendors.<br><small>${e.message}</small></div>`;
-  }
+  })
+  .catch(function(e){
+    document.getElementById('expertGrid').innerHTML='<div class="empty-state">Could not load vendors: '+e.message+'</div>';
+  });
 }
 
 function filterExperts(cat,btn){
-  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.filter-btn').forEach(function(b){b.classList.remove('active');});
   btn.classList.add('active');
-  renderExperts(cat==='All'?allExperts:allExperts.filter(e=>e.Category===cat));
-}
-
-
-function goToVendor(name){
-  const url='https://clever-biscochitos-37a2e6.netlify.app/vendor.html?name='+encodeURIComponent(name);
-  // Open in top window — works inside iframe too
-  window.top.location.href=url;
+  renderExperts(cat==='All'?allExperts:allExperts.filter(function(e){return e.Category===cat;}));
 }
 
 function renderExperts(list){
   document.getElementById('countNum').textContent=list.length;
   if(!list.length){document.getElementById('expertGrid').innerHTML='<div class="empty-state">No experts found.</div>';return;}
-  document.getElementById('expertGrid').innerHTML=list.map((e,i)=>{
-    const photo=e.Logo_URL||FALLBACK;
-    const isLogo=!!e.Logo_URL;
-    const desc=(e.Tagline||'').slice(0,100)+((e.Tagline||'').length>100?'…':'');
-    return `<div class="expert-card" style="animation-delay:${i*0.07}s" onclick="goToVendor('${(e.Name||'').replace(/'/g,"\\'")}')">
-      <div class="card-photo-wrap">
-        <img src="${photo}" alt="${e.Name||''}" class="card-photo${isLogo?' is-logo':''}" loading="lazy" onerror="this.src='${FALLBACK}';this.classList.remove('is-logo')">
-        <span class="photo-cat">${e.Category||''}</span>
-      </div>
-      <div class="card-body">
-        <div class="card-name">${e.Name||''}</div>
-        <div class="card-meta">
-          <span class="verified">Verified Expert</span>
-          ${e.Location?`<span class="loc">${e.Location}</span>`:''}
-        </div>
-        <div class="card-desc">${desc}</div>
-        <div class="card-cta">View Profile</div>
-      </div>
-    </div>`;
+  document.getElementById('expertGrid').innerHTML=list.map(function(e,i){
+    var photo=e.Logo_URL||FALLBACK;
+    var isLogo=!!e.Logo_URL;
+    var desc=(e.Tagline||'').substring(0,100)+((e.Tagline||'').length>100?'...':'');
+    return '<div class="expert-card" style="animation-delay:'+(i*0.07)+'s" onclick="goToVendor(\''+e.Name.replace(/'/g,"\\'")+'\')">'
+      +'<div class="card-photo-wrap">'
+      +'<img src="'+photo+'" alt="'+(e.Name||'')+'" class="card-photo'+(isLogo?' is-logo':'')+'" loading="lazy" onerror="this.src=\''+FALLBACK+'\'">'
+      +'<span class="photo-cat">'+(e.Category||'')+'</span>'
+      +'</div>'
+      +'<div class="card-body">'
+      +'<div class="card-name">'+(e.Name||'')+'</div>'
+      +'<div class="card-meta"><span class="verified">Verified Expert</span>'+(e.Location?'<span class="loc">'+e.Location+'</span>':'')+'</div>'
+      +'<div class="card-desc">'+desc+'</div>'
+      +'<div class="card-cta">View Profile</div>'
+      +'</div></div>';
   }).join('');
 }
+
+function goToVendor(name){
+  window.top.location.href=VENDOR_PAGE+'?name='+encodeURIComponent(name);
+}
+
 loadExperts();
+setInterval(loadExperts,120000);
 </script>
 </body>
 </html>
