@@ -90,6 +90,17 @@ body{background:var(--cream);color:var(--deep);font-family:'Outfit',sans-serif;-
   </div>
 </div>
 <script>
+
+function parseResponse(data){
+  if(Array.isArray(data)) return data;
+  if(data && data.values) return data.values;
+  if(data && typeof data === 'object'){
+    var keys = Object.keys(data);
+    if(keys.length > 0) return data[keys[0]];
+  }
+  return [];
+}
+
 var SHEETS_URL='https://opensheet.elk.sh/1CaYOuLNAU3b-MIm-8lAXiH8RZErrI2n3epzrr4W6T1o/Imported%20table';
 var VENDOR_PAGE='https://dsath92.github.io/vendors/vendor.html';
 var FALLBACK='https://images.unsplash.com/photo-1470509037663-253afd7f0f51?auto=format&fit=crop&w=600&q=80';
@@ -101,7 +112,7 @@ function loadExperts(){
   fetch(SHEETS_URL)
   .then(function(r){return r.json();})
   .then(function(data){
-    allExperts=data.filter(function(f){
+    allExperts=parseResponse(data).filter(function(f){
       return f.Status&&f.Status.trim().toLowerCase()==='approved';
     });
     renderExperts(allExperts);
