@@ -25,14 +25,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 @media(max-width:500px){.row2{grid-template-columns:1fr;}}
 .hint{font-size:11px;color:#888;margin-top:4px;}
 
-/* Logo upload */
 .logo-area{border:2px dashed #c4b5fd;border-radius:10px;padding:1.5rem;text-align:center;cursor:pointer;background:#faf5ff;position:relative;}
 .logo-area input{position:absolute;inset:0;opacity:0;cursor:pointer;}
 .logo-area p{font-size:13px;color:#7c3aed;font-weight:500;}
 .logo-area small{font-size:11px;color:#888;}
 #logoPreview{display:none;width:80px;height:80px;border-radius:50%;object-fit:contain;border:2px solid #c4b5fd;margin:10px auto 0;}
 
-/* Photo gallery upload */
 .photos-area{border:2px dashed #c4b5fd;border-radius:10px;padding:1.5rem;text-align:center;cursor:pointer;background:#faf5ff;position:relative;}
 .photos-area input{position:absolute;inset:0;opacity:0;cursor:pointer;}
 .photos-area p{font-size:13px;color:#7c3aed;font-weight:500;}
@@ -42,14 +40,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .photo-preview img{width:100%;height:100%;object-fit:cover;}
 .photo-preview .remove{position:absolute;top:2px;right:2px;background:rgba(0,0,0,0.6);color:#fff;border:none;border-radius:50%;width:18px;height:18px;font-size:11px;cursor:pointer;display:flex;align-items:center;justify-content:center;}
 
-/* Services */
 .svcs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
 @media(max-width:500px){.svcs-grid{grid-template-columns:repeat(2,1fr);}}
 .svc-check{display:flex;align-items:center;gap:6px;padding:8px 10px;background:#f8f8f8;border:1px solid #e0e0e0;border-radius:8px;cursor:pointer;}
 .svc-check input{accent-color:#7c3aed;width:14px;height:14px;}
 .svc-check span{font-size:12px;color:#444;font-weight:500;}
 
-/* Progress */
 .progress-wrap{margin-bottom:1rem;display:none;}
 .progress-bar{height:6px;background:#ede9fe;border-radius:99px;overflow:hidden;}
 .progress-fill{height:100%;background:#7c3aed;border-radius:99px;transition:width 0.3s;width:0%;}
@@ -91,6 +87,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
             <option>Decoration</option>
             <option>Catering</option>
             <option>Priest / Pandit</option>
+            <option>🏠 Realtor</option>
+            <option>🏢 Indian Owned Business</option>
             <option>Other</option>
           </select>
         </div>
@@ -258,7 +256,6 @@ function previewPhotos(input) {
 
 function removePhoto(idx) {
   selectedPhotos.splice(idx, 1);
-  var fakeInput = {files: selectedPhotos};
   document.getElementById('photoPreviews').innerHTML = '';
   selectedPhotos.forEach(function(file, i) {
     var reader = new FileReader();
@@ -303,7 +300,7 @@ async function uploadToCloudinary(file, onProgress) {
   var formData = new FormData();
   formData.append('file', compressed);
   formData.append('upload_preset', CLOUDINARY_PRESET);
-  
+
   return new Promise(function(resolve, reject) {
     var xhr = new XMLHttpRequest();
     xhr.open('POST', 'https://api.cloudinary.com/v1_1/' + CLOUDINARY_CLOUD + '/image/upload');
@@ -352,7 +349,6 @@ async function submitForm() {
   hideError();
 
   try {
-    // Upload logo
     var logoUrl = '';
     if (logoFile) {
       document.getElementById('progressWrap').style.display = 'block';
@@ -363,13 +359,11 @@ async function submitForm() {
       });
     }
 
-    // Upload portfolio photos
     var photoUrls = [];
     if (selectedPhotos.length > 0) {
       document.getElementById('progressText').textContent = 'Uploading photos...';
       for (var i = 0; i < selectedPhotos.length; i++) {
-        var pct = Math.round(((i) / selectedPhotos.length) * 100);
-        document.getElementById('progressFill').style.width = pct + '%';
+        document.getElementById('progressFill').style.width = Math.round((i / selectedPhotos.length) * 100) + '%';
         document.getElementById('progressText').textContent = 'Uploading photo ' + (i+1) + ' of ' + selectedPhotos.length + '...';
         var url = await uploadToCloudinary(selectedPhotos[i]);
         photoUrls.push(url);
@@ -379,11 +373,9 @@ async function submitForm() {
 
     btn.innerHTML = '<span class="loading"></span>Saving...';
 
-    // Collect services
     var services = Array.from(document.querySelectorAll('.svcs-grid input:checked'))
       .map(function(cb) { return cb.value; }).join(', ');
 
-    // Prepare data for Google Sheets
     var data = {
       Name: name,
       Category: category,
@@ -411,7 +403,6 @@ async function submitForm() {
       Status: 'Pending'
     };
 
-    // Submit to Google Sheets via Apps Script
     await fetch(SHEETS_URL, {
       method: 'POST',
       mode: 'no-cors',
