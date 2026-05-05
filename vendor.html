@@ -58,7 +58,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .soc-btn span{font-size:11px;color:#555;font-weight:500;}
 .soc-btn svg{width:22px;height:22px;}
 
-/* Gallery */
 .gallery-wrap{margin-bottom:1.75rem;}
 .gallery-slider{display:flex;gap:8px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-ms-overflow-style:none;padding-bottom:4px;}
 .gallery-slider::-webkit-scrollbar{display:none;}
@@ -66,7 +65,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .gallery-thumb img{width:100%;height:100%;object-fit:cover;transition:transform 0.3s;}
 .gallery-thumb:hover img{transform:scale(1.05);}
 
-/* Lightbox */
 .lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:9999;align-items:center;justify-content:center;padding:20px;}
 .lightbox.open{display:flex;}
 .lightbox-img{max-width:90vw;max-height:85vh;border-radius:10px;object-fit:contain;}
@@ -90,29 +88,28 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 <script>
 const SHEETS_URL='https://opensheet.elk.sh/1CaYOuLNAU3b-MIm-8lAXiH8RZErrI2n3epzrr4W6T1o/1';
 const FALLBACK='https://images.unsplash.com/photo-1470509037663-253afd7f0f51?auto=format&fit=crop&w=600&q=80';
-const CAT_PAGES={'Photography':'https://www.ushindurituals.com/photo-video','Decoration':'https://www.ushindurituals.com/decoration-service','Makeup':'https://www.ushindurituals.com/find-your-makeup-artist','Catering':'https://www.ushindurituals.com','Priest / Pandit':'https://www.ushindurituals.com','Other':'https://www.ushindurituals.com'};
-const THEMES={Photography:{bg:'#1a0a2e',glow:'rgba(139,92,246,0.35)',ring:'rgba(167,139,250,0.6)',name:'#e9d5ff',sub:'#a78bfa',badge:'#EEEDFE',badgeC:'#3C3489'},Makeup:{bg:'#1a0a1a',glow:'rgba(236,72,153,0.28)',ring:'rgba(249,168,212,0.6)',name:'#fce7f3',sub:'#f9a8d4',badge:'#fce7f3',badgeC:'#831843'},Decoration:{bg:'#1a100a',glow:'rgba(251,191,36,0.28)',ring:'rgba(253,230,138,0.6)',name:'#fef3c7',sub:'#fcd34d',badge:'#fef3c7',badgeC:'#92400e'},Catering:{bg:'#0a1a14',glow:'rgba(20,184,166,0.28)',ring:'rgba(94,234,212,0.6)',name:'#ccfbf1',sub:'#5eead4',badge:'#ccfbf1',badgeC:'#134e4a'},default:{bg:'#1a0a2e',glow:'rgba(139,92,246,0.35)',ring:'rgba(167,139,250,0.6)',name:'#e9d5ff',sub:'#a78bfa',badge:'#EEEDFE',badgeC:'#3C3489'}};
+const CAT_PAGES={
+  'Photography':'https://www.ushindurituals.com/photo-video',
+  'Decoration':'https://www.ushindurituals.com/decoration-service',
+  'Makeup':'https://www.ushindurituals.com/find-your-makeup-artist',
+  'Catering':'https://www.ushindurituals.com',
+  'Priest / Pandit':'https://www.ushindurituals.com',
+  '🏠 Realtor':'https://www.ushindurituals.com',
+  '🏢 Indian Owned Business':'https://www.ushindurituals.com',
+  'Other':'https://www.ushindurituals.com'
+};
+const THEMES={
+  Photography:{bg:'#1a0a2e',glow:'rgba(139,92,246,0.35)',ring:'rgba(167,139,250,0.6)',name:'#e9d5ff',sub:'#a78bfa',badge:'#EEEDFE',badgeC:'#3C3489'},
+  Makeup:{bg:'#1a0a1a',glow:'rgba(236,72,153,0.28)',ring:'rgba(249,168,212,0.6)',name:'#fce7f3',sub:'#f9a8d4',badge:'#fce7f3',badgeC:'#831843'},
+  Decoration:{bg:'#1a100a',glow:'rgba(251,191,36,0.28)',ring:'rgba(253,230,138,0.6)',name:'#fef3c7',sub:'#fcd34d',badge:'#fef3c7',badgeC:'#92400e'},
+  Catering:{bg:'#0a1a14',glow:'rgba(20,184,166,0.28)',ring:'rgba(94,234,212,0.6)',name:'#ccfbf1',sub:'#5eead4',badge:'#ccfbf1',badgeC:'#134e4a'},
+  '🏠 Realtor':{bg:'#0a1220',glow:'rgba(59,130,246,0.28)',ring:'rgba(147,197,253,0.6)',name:'#dbeafe',sub:'#93c5fd',badge:'#dbeafe',badgeC:'#1e3a5f'},
+  '🏢 Indian Owned Business':{bg:'#1a0a0a',glow:'rgba(220,38,38,0.25)',ring:'rgba(252,165,165,0.6)',name:'#fee2e2',sub:'#fca5a5',badge:'#fee2e2',badgeC:'#7f1d1d'},
+  default:{bg:'#1a0a2e',glow:'rgba(139,92,246,0.35)',ring:'rgba(167,139,250,0.6)',name:'#e9d5ff',sub:'#a78bfa',badge:'#EEEDFE',badgeC:'#3C3489'}
+};
 const EMOJIS={'Weddings':'💍','Wedding':'💍','Housewarming':'🏠','Baby Shower':'🍼','Gender Reveal':'🎀','Birthdays':'🎂','Birthday':'🎂','Naming Ceremony':'🪔','Arangetram':'🎭','Annaprashanam':'🌾','Functions':'🎊','Saree Function':'👘','Catering':'🍽️','Poojas':'🪔','All Occasions':'📸'};
 
 let vendorCategory='';
-
-function parseCSV(text){
-  const lines=text.split('\n');
-  const headers=lines[0].split(',').map(h=>h.trim().replace(/^"|"$/g,''));
-  return lines.slice(1).filter(l=>l.trim()).map(line=>{
-    const values=[];let inQ=false;let val='';
-    for(let i=0;i<line.length;i++){
-      const c=line[i];
-      if(c==='"'){inQ=!inQ;}
-      else if(c===','&&!inQ){values.push(val.trim().replace(/^"|"$/g,''));val='';}
-      else{val+=c;}
-    }
-    values.push(val.trim().replace(/^"|"$/g,''));
-    const obj={};
-    headers.forEach((h,i)=>{obj[h]=values[i]||'';});
-    return obj;
-  });
-}
 
 function goBack(){
   if(window.opener){
@@ -140,9 +137,6 @@ async function loadVendor(){
 
 function renderVendor(f){
   vendorCategory=f.Category||'';
-  const catPage=CAT_PAGES[vendorCategory]||'https://www.ushindurituals.com';
-
-  
   const t=THEMES[f.Category]||THEMES.default;
   const services=f.Services?f.Services.split(',').map(s=>{
     const label=s.trim().replace(/^\p{Emoji}\s*/u,'').trim();
@@ -150,7 +144,6 @@ function renderVendor(f){
     return `<div class="svc-chip"><span class="svc-icon">${emoji}</span><span class="svc-label">${label}</span></div>`;
   }).join(''):'';
   const videos=[{id:f.Video1,title:f.Video1_Title||'Video 1'},{id:f.Video2,title:f.Video2_Title||'Video 2'},{id:f.Video3,title:f.Video3_Title||'Video 3'},{id:f.Video4,title:f.Video4_Title||'Video 4'}].filter(v=>v.id&&v.id.trim());
-  // Gallery
   var galleryPhotos=f.Photos?f.Photos.split(',').map(function(u){return u.trim();}).filter(Boolean):[];
   var gallerySection=galleryPhotos.length?
     '<div class="gallery-wrap"><div class="sec-label">📸 Portfolio</div><div class="gallery-slider">'
@@ -164,6 +157,7 @@ function renderVendor(f){
   const phones=[f.Phone1,f.Phone2].filter(p=>p&&p.trim()).map(p=>`<a class="phone-btn" href="tel:${p.replace(/\D/g,'')}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.06 1.22 2 2 0 012 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92z"/></svg>${p}</a>`).join('');
   const wa=f.WhatsApp&&f.WhatsApp.trim()?`<a class="wa-btn" href="https://wa.me/${f.WhatsApp.replace(/\D/g,'')}" target="_blank"><svg width="18" height="18" viewBox="0 0 32 32" fill="none"><path d="M16 2C8.27 2 2 8.27 2 16c0 2.44.65 4.73 1.78 6.72L2 30l7.5-1.75A13.93 13.93 0 0016 30c7.73 0 14-6.27 14-14S23.73 2 16 2zm6.3 19.88c-.35-.17-2.05-.99-2.37-1.1-.32-.12-.55-.17-.78.17-.23.35-.9 1.1-1.1 1.33-.2.22-.4.25-.75.08-2.07-.97-3.43-1.73-4.8-3.93-.36-.62.36-.58.99-1.93.11-.23.06-.43-.03-.6-.08-.17-.78-1.88-1.07-2.57-.28-.67-.57-.58-.78-.59h-.67c-.23 0-.6.08-.91.43-.32.35-1.2 1.17-1.2 2.85 0 1.68 1.23 3.3 1.4 3.53.17.23 2.4 3.67 5.83 5.15 2.17.93 3.02 1.01 4.1.85.66-.1 2.05-.84 2.34-1.64.29-.8.29-1.49.2-1.64-.08-.14-.3-.22-.65-.4z" fill="white"/></svg>Book Now on WhatsApp</a>`:'';
   const socials=[f.Facebook&&{href:f.Facebook,label:'Facebook',icon:`<svg viewBox="0 0 24 24" fill="#1877F2"><path d="M24 12.07C24 5.41 18.63 0 12 0S0 5.41 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.04V9.41c0-3.02 1.8-4.7 4.54-4.7 1.31 0 2.68.24 2.68.24v2.97h-1.51c-1.49 0-1.95.93-1.95 1.89v2.26h3.32l-.53 3.5h-2.79V24C19.61 23.1 24 18.1 24 12.07z"/></svg>`},f.Instagram&&{href:f.Instagram,label:'Instagram',icon:`<svg viewBox="0 0 24 24"><defs><radialGradient id="ig" cx="30%" cy="107%" r="150%"><stop offset="0%" stop-color="#fdf497"/><stop offset="45%" stop-color="#fd5949"/><stop offset="60%" stop-color="#d6249f"/><stop offset="90%" stop-color="#285AEB"/></radialGradient></defs><path fill="url(#ig)" d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>`},f.YouTube_Channel&&{href:f.YouTube_Channel,label:'YouTube',icon:`<svg viewBox="0 0 24 24" fill="#FF0000"><path d="M23.495 6.205a3.007 3.007 0 00-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 00.527 6.205a31.247 31.247 0 00-.522 5.805 31.247 31.247 0 00.522 5.783 3.007 3.007 0 002.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 002.088-2.088 31.247 31.247 0 00.5-5.783 31.247 31.247 0 00-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>`},f.Website&&{href:f.Website,label:'Website',icon:`<svg viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>`},f.Email&&{href:`mailto:${f.Email}`,label:'Email',icon:`<svg viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>`}].filter(Boolean);
+
   document.getElementById('vendorCard').innerHTML=`<div class="hero" style="background:${t.bg}"><div class="hero-glow" style="background:radial-gradient(ellipse at 50% 0%,${t.glow} 0%,transparent 65%)"></div><div class="logo-ring" style="border-color:${t.ring}"><img src="${f.Logo_URL||FALLBACK}" alt="${f.Name||''}" onerror="this.src='${FALLBACK}'"></div><div class="vendor-name" style="color:${t.name}">${f.Name||''}</div><div class="vendor-sub" style="color:${t.sub}">${f.Category||''}${f.Location?' · '+f.Location:''}</div><div class="stars">★★★★★</div><span class="badge" style="background:${t.badge};color:${t.badgeC}">${f.Location||''}</span></div><div class="body">${f.Tagline?`<p class="tagline">${f.Tagline}</p>`:''} ${services?`<div class="sec-label">Services</div><div class="services">${services}</div>`:''} ${ytSection}${gallerySection}<div class="contact"><div class="sec-label">Contact &amp; Connect</div>${phones?`<div class="phones">${phones}</div>`:''} ${wa} ${socials.length?`<div class="social-row">${socials.map(s=>`<a class="soc-btn" href="${s.href}" target="_blank">${s.icon}<span>${s.label}</span></a>`).join('')}</div>`:''}</div></div>`;
   document.getElementById('loadingWrap').style.display='none';
   document.getElementById('pageWrap').style.display='flex';
@@ -211,10 +205,8 @@ document.addEventListener('keydown',function(e){
   if(e.key==='ArrowRight') lightboxNext({stopPropagation:function(){}});
   if(e.key==='Escape') closeLightboxBtn();
 });
-
 </script>
 
-<!-- Lightbox -->
 <div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
   <button class="lightbox-close" onclick="closeLightboxBtn()">✕</button>
   <button class="lightbox-prev" onclick="lightboxPrev(event)">‹</button>
